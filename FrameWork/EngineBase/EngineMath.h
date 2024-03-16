@@ -1,21 +1,13 @@
 #pragma once
-class EngineMath
+namespace EngineMath
 {
-public:
-	// construtor destructor
-	EngineMath();
-	~EngineMath();
-
-	// delete Function
-	EngineMath(const EngineMath& _Other) = delete;
-	EngineMath(EngineMath&& _Other) noexcept = delete;
-	EngineMath& operator=(const EngineMath& _Other) = delete;
-	EngineMath& operator=(EngineMath&& _Other) noexcept = delete;
-
-protected:
-
-
-private:
 
 };
 
+struct float4
+{
+	float x = 0.f;
+	float y = 0.f;
+	float z = 0.f;
+	float w = 0.f;
+}; 

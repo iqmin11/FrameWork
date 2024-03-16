@@ -15,5 +15,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	EngineWindow::WindowCreate(hInstance, "Test");
 	EngineWindow::WindowLoop();
 
-	return 1;
+	return 0;
 }

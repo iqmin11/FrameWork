@@ -3,6 +3,11 @@
 
 HINSTANCE EngineWindow::hInst;
 HWND EngineWindow::hWnd;
+HDC EngineWindow::hDC;
+bool EngineWindow::bIsWindowUpdate = false;
+const float4 EngineWindow::DefaultWindowSize = { 1600.f, 900.f, 0.f, 1.f };
+float4 EngineWindow::WindowPos = float4::Zero();
+float4 EngineWindow::WindowSize = EngineWindow::DefaultWindowSize;
 
 EngineWindow::EngineWindow()
 {
@@ -14,7 +19,7 @@ EngineWindow::~EngineWindow()
 
 }
 
-void EngineWindow::WindowCreate(HINSTANCE hInstance, std::string_view TileName)
+void EngineWindow::WindowCreate(HINSTANCE hInstance, std::string_view TileName, const float4& Pos, const float4& Size)
 {
     // 윈도우 정보 등록 (어떤 특징을 가진 윈도우를 만들거야!)
     if (!static_cast<bool>(MyRegisterClass(hInstance)))
@@ -29,6 +34,10 @@ void EngineWindow::WindowCreate(HINSTANCE hInstance, std::string_view TileName)
         MsgAssert("Window 창 생성에 실패했습니다.");
         return; // InitInstance가 false면 프로세스 종료
     }
+
+    hDC = GetDC(hWnd);
+    bIsWindowUpdate = true;
+    InitWndRect(Pos, Size);
 }
 
 ATOM EngineWindow::MyRegisterClass(HINSTANCE hInstance)
@@ -77,6 +86,7 @@ LRESULT EngineWindow::MsgFunc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
     {
         // Message함수가 0을 리턴하게 만들어라.
         PostQuitMessage(0);
+        bIsWindowUpdate = false;
         break;
     }
     default:
@@ -104,16 +114,40 @@ BOOL EngineWindow::InitInstance(HINSTANCE hInstance, std::string_view TitleName)
     return TRUE;
 }
 
-void EngineWindow::WindowLoop()
+void EngineWindow::InitWndRect(const float4& Pos, const float4& Size)
 {
+    WindowPos = Pos;
+    RECT WindowRect = { 0, 0, Size.ix(), Size.iy() };
+    AdjustWindowRect(&WindowRect, WS_OVERLAPPEDWINDOW, FALSE);
+    WindowSize = { static_cast<float>(WindowRect.right - WindowRect.left), static_cast<float>(WindowRect.bottom - WindowRect.top) };
+    SetWindowPos(hWnd, nullptr, WindowPos.ix(), WindowPos.iy(), WindowSize.ix(), WindowSize.iy(), SWP_NOZORDER);
+}
+
+void EngineWindow::WindowLoop(std::function<void()> Begin, std::function<void()> Tick, std::function<void()> End)
+{
+    if (Begin != nullptr)
+    {
+        Begin();
+    }
+
     MSG msg;
 
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (bIsWindowUpdate)
     {
-        if (!TranslateAccelerator(msg.hwnd, nullptr, &msg))
+        if (GetMessage(&msg, nullptr, 0, 0))
         {
+            if (Tick != nullptr)
+            {
+                Tick();
+            }
+
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+    }
+
+    if (End != nullptr)
+    {
+        End();
     }
 }

@@ -1,5 +1,7 @@
 #pragma once
-class EngineActor
+#include "EngineObject.h"
+
+class EngineActor : public EngineObject
 {
 public:
 	// construtor destructor
@@ -13,7 +15,8 @@ public:
 	EngineActor& operator=(EngineActor&& _Other) noexcept = delete;
 
 protected:
-
+	void Begin() override;
+	void Tick(float DeltaTime) override;
 
 private:
 

@@ -9,3 +9,11 @@ EngineActor::~EngineActor()
 {
 
 }
+
+void EngineActor::Begin()
+{
+}
+
+void EngineActor::Tick(float DeltaTime)
+{
+}

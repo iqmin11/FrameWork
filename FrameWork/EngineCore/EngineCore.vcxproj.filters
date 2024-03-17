@@ -2,12 +2,46 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="EngineCore.h" />
-    <ClInclude Include="EngineLevel.h" />
-    <ClInclude Include="EngineActor.h" />
+    <ClInclude Include="EngineObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineLevel.h">
+      <Filter>Object\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineActor.h">
+      <Filter>Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
-    <ClCompile Include="EngineLevel.cpp" />
-    <ClCompile Include="EngineActor.cpp" />
+    <ClCompile Include="EngineObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineLevel.cpp">
+      <Filter>Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineActor.cpp">
+      <Filter>Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Object">
+      <UniqueIdentifier>{f8c05134-bfc3-49a2-8313-4da621ae5fff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor">
+      <UniqueIdentifier>{068389e7-ec6d-4867-9fe0-e820af87a232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Level">
+      <UniqueIdentifier>{079bef41-74c8-4b42-a553-5ce086c339d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component">
+      <UniqueIdentifier>{6eaab15c-0906-414c-8aa4-653aff6c600a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

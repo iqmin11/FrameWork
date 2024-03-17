@@ -163,11 +163,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineComponent.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineCore.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="EngineLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineObject.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -177,11 +185,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineComponent.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EngineCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineObject.cpp">
       <SubType>
       </SubType>
     </ClCompile>

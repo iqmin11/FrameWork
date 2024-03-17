@@ -9,6 +9,7 @@
 #include "Resource.h"
 
 //myclass
+#include <EngineBase/EngineDebug.h>
 #include <EngineBase/EngineMath.h>
 
 class EngineWindow
@@ -26,12 +27,17 @@ public:
 
 	static void WindowCreate(HINSTANCE hInstance, std::string_view TitleName, const float4& StartPos = float4::Zero(), const float4& Size = DefaultWindowSize);
 	static void WindowLoop(std::function<void()> Begin, std::function<void()> Tick, std::function<void()> End);
+	static void WinodwRelease();
+
+	static const float4 DefaultWindowPos;
+	static const float4 DefaultWindowSize;
 
 protected:
 
 
 private:
 
+	static WNDCLASSEX wcex;
 	static HINSTANCE hInst;
 	static HWND hWnd;
 	static HDC hDC;
@@ -45,7 +51,6 @@ private:
 	//SetWindowOption
 
 	static bool bIsWindowUpdate;
-	static const float4 DefaultWindowSize;
 
 	static float4 WindowPos;
 	static float4 WindowSize;

@@ -1,13 +1,7 @@
 #include <Windows.h>
-#include <EngineBase/EngineDebug.h>
-#include <EnginePlatform/EngineWindow.h>
+#include <EngineCore/EngineCore.h>
 
 void TestStart()
-{
-	int a = 0;
-}
-
-void TestTick()
 {
 	int a = 0;
 }
@@ -22,9 +16,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
-	EngineDebug::LeakCheck();
-	EngineWindow::WindowCreate(hInstance, "Test");
-	EngineWindow::WindowLoop(TestStart, TestTick, TestEnd);
-
+	EngineCore::CoreInit(hInstance, "ChatServer", TestStart, TestEnd);
 	return 0;
 }

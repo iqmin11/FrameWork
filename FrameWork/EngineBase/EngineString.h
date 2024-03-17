@@ -4,6 +4,6 @@
 
 namespace EngineString
 {
-
+	std::string ToUpper(std::string_view Str);
 };
 

@@ -1,10 +1,11 @@
 #pragma once
 #include "EngineActor.h"
+#include "EngineCore.h"
 
 class EngineLevel : public EngineActor
 {
+	friend EngineCore;
 public:
-	// construtor destructor
 	EngineLevel();
 	~EngineLevel();
 
@@ -19,5 +20,6 @@ protected:
 	void Tick(float DeltaTime) override;
 
 private:
+	// construtor destructor
 
 };

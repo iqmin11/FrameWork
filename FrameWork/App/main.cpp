@@ -1,21 +1,12 @@
 #include <Windows.h>
 #include <EngineCore/EngineCore.h>
-
-void TestStart()
-{
-	int a = 0;
-}
-
-void TestEnd()
-{
-	int a = 0;
-}
+#include <EngineContents/ContentsCore.h>
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
-	EngineCore::CoreInit(hInstance, "ChatServer", TestStart, TestEnd);
+	EngineCore::CoreInit(hInstance, "ChatServer", ContentsCore::ContentsBegin, ContentsCore::ContentsEnd);
 	return 0;
 }

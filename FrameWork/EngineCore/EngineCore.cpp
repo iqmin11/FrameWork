@@ -1,4 +1,8 @@
 #include "EngineCore.h"
+#include "EngineLevel.h"
+
+std::shared_ptr<EngineLevel> EngineCore::CurUpdatedLevel = nullptr;
+std::map<std::string, std::shared_ptr<EngineLevel>> EngineCore::LevelManager;
 
 EngineCore::EngineCore()
 {
@@ -19,6 +23,15 @@ void EngineCore::CoreInit(HINSTANCE hInst, std::string_view TitleName, std::func
 
 void EngineCore::CoreTick()
 {
+	float TempTime = 0.f;
+
+	if (CurUpdatedLevel == nullptr)
+	{
+		MsgAssert("CurUpdatedLevel == nullptr");
+		return;
+	}
+
+	CurUpdatedLevel->Tick(TempTime);
 	int a = 0;
 }
 

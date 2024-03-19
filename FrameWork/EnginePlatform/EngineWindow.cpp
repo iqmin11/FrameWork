@@ -154,5 +154,6 @@ void EngineWindow::WindowLoop(std::function<void()> Begin, std::function<void()>
 
 void EngineWindow::WinodwRelease()
 {
+	DestroyWindow(hWnd);
 	UnregisterClassA(wcex.lpszClassName, hInst);
 }

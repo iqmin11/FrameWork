@@ -17,6 +17,16 @@ public:
 	static void WindowLoop(std::function<void()> Begin, std::function<void()> Tick, std::function<void()> End);
 	static void WinodwRelease();
 
+	static const float4& GetScreenSize()
+	{
+		return WindowSize;
+	}
+
+	static HWND GethWnd()
+	{
+		return hWnd;
+	}
+
 	static const float4 DefaultWindowPos;
 	static const float4 DefaultWindowSize;
 

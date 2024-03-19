@@ -2,6 +2,7 @@
 
 #include "EngineCore.h"
 #include "EngineLevel.h"
+#include "EngineDevice.h"
 
 std::shared_ptr<EngineLevel> EngineCore::CurUpdatedLevel = nullptr;
 std::map<std::string, std::shared_ptr<EngineLevel>> EngineCore::LevelManager;
@@ -40,6 +41,7 @@ void EngineCore::CoreTick()
 void EngineCore::EngineBegin(std::function<void()> ContentsBegin)
 {
 	//EngineBegin
+	EngineDevice::Initialize();
 
 	//ContentsBegin
 	if (ContentsBegin != nullptr)
@@ -57,6 +59,7 @@ void EngineCore::EngineEnd(std::function<void()> ContentsEnd)
 	}
 	
 	//EngineEnd
+	EngineDevice::Release();
 	EngineWindow::WinodwRelease();
 }
 

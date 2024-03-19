@@ -206,6 +206,17 @@
       </SubType>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EngineBase\EngineBase.vcxproj">
+      <Project>{e884423d-a884-4113-ad60-5726fcbe34b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\EngineCore\EngineCore.vcxproj">
+      <Project>{9c20436a-fb7d-4306-9822-73ae601f854a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\EnginePlatform\EnginePlatform.vcxproj">
+      <Project>{4b595089-d662-4e3d-a007-ffaa68a89d96}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

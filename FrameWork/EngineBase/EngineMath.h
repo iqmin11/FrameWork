@@ -32,6 +32,21 @@ struct float4
 		return static_cast<int>(z);
 	}
 
+	inline int uix() const
+	{
+		return static_cast<unsigned int>(x);
+	}
+
+	inline int uiy() const
+	{
+		return static_cast<unsigned int>(y);
+	}
+
+	inline int uiz() const
+	{
+		return static_cast<unsigned int>(z);
+	}
+
 	//Operator///////////////////////////
 	bool operator== (const float4& Right)
 	{
@@ -39,8 +54,54 @@ struct float4
 	}
 
 	//Property///////////////////////////
-	float x = 0.f;
-	float y = 0.f;
-	float z = 0.f;
-	float w = 1.f;
+	union
+	{
+		struct
+		{
+			float x;
+			float y;
+			float z;
+			float w;
+		};
+
+		struct
+		{
+			float r;
+			float g;
+			float b;
+			float a;
+		};
+
+		struct
+		{
+			float PosX;
+			float PosY;
+			float SizeX;
+			float SizeY;
+		};	
+
+		float Arr1D[4];
+	};
+
+	//Constructor///////////////////////////
+	float4()
+		: x(0.0f), y(0.0f), z(0.0f), w(1.0f)
+	{
+	}
+
+	float4(float _x, float _y)
+		: x(_x), y(_y), z(0.0f), w(1.0f)
+	{
+	}
+
+	float4(float _x, float _y, float _z)
+		: x(_x), y(_y), z(_z), w(1.0f)
+	{
+	}
+
+	float4(float _x, float _y, float _z, float _w)
+		: x(_x), y(_y), z(_z), w(_w)
+	{
+	}
+
 }; 

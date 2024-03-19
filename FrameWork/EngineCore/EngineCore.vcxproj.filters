@@ -17,6 +17,9 @@
     <ClInclude Include="PrecompileHeader.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="EngineDevice.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -35,6 +38,9 @@
     <ClCompile Include="PrecompileHeader.cpp">
       <Filter>Header</Filter>
     </ClCompile>
+    <ClCompile Include="EngineDevice.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -51,6 +57,9 @@
     </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{7e090830-0c7e-44e8-834b-699c5facaa76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX">
+      <UniqueIdentifier>{da4ad1d9-f6f9-4d9b-a237-7d3541bc06ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

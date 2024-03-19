@@ -4,10 +4,21 @@
     <ClInclude Include="EngineDebug.h" />
     <ClInclude Include="EngineMath.h" />
     <ClInclude Include="EngineString.h" />
+    <ClInclude Include="PrecompileHeader.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp" />
     <ClCompile Include="EngineMath.cpp" />
     <ClCompile Include="EngineString.cpp" />
+    <ClCompile Include="PrecompileHeader.cpp">
+      <Filter>Header</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{37a36f3d-61c3-4ef0-b854-3a33f084e02e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

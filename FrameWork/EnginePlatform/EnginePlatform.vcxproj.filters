@@ -5,20 +5,26 @@
       <Filter>Window</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Window\WindowDefaultHeader</Filter>
+      <Filter>Header\WindowDefaultHeader</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
-      <Filter>Window\WindowDefaultHeader</Filter>
+      <Filter>Header\WindowDefaultHeader</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Window\WindowDefaultHeader</Filter>
+      <Filter>Header\WindowDefaultHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="PrecompileHeader.h">
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
       <UniqueIdentifier>{a231d329-d523-49d5-bbcd-f4d284415dc7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Window\WindowDefaultHeader">
+    <Filter Include="Header">
+      <UniqueIdentifier>{6306095a-5fe4-42cc-9531-61d82948dd60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\WindowDefaultHeader">
       <UniqueIdentifier>{3ac4c879-6501-4f99-b005-2912e00aeecd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -26,10 +32,13 @@
     <ClCompile Include="EngineWindow.cpp">
       <Filter>Window</Filter>
     </ClCompile>
+    <ClCompile Include="PrecompileHeader.cpp">
+      <Filter>Header</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint">
-      <Filter>Window\WindowDefaultHeader</Filter>
+      <Filter>Header\WindowDefaultHeader</Filter>
     </None>
   </ItemGroup>
 </Project>

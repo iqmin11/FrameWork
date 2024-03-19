@@ -4,10 +4,21 @@
     <ClInclude Include="TestClass.h" />
     <ClInclude Include="TestLevel.h" />
     <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="PrecompileHeader.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestClass.cpp" />
     <ClCompile Include="TestLevel.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="PrecompileHeader.cpp">
+      <Filter>Header</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{aac66d8d-f954-4700-ae85-71d521c7afbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

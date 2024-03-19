@@ -164,11 +164,19 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="PrecompileHeader.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineWindow.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PrecompileHeader.cpp">
       <SubType>
       </SubType>
     </ClCompile>

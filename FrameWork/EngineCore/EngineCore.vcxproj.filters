@@ -14,6 +14,7 @@
     <ClInclude Include="EngineComponent.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
+    <ClInclude Include="PrecompileHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="EngineComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="PrecompileHeader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -42,6 +44,9 @@
     </Filter>
     <Filter Include="Object\Component">
       <UniqueIdentifier>{6eaab15c-0906-414c-8aa4-653aff6c600a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{7e090830-0c7e-44e8-834b-699c5facaa76}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

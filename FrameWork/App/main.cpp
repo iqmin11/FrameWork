@@ -1,4 +1,7 @@
-#include <Windows.h>
+#pragma once
+
+#include "PrecompileHeader.h"
+
 #include <EngineCore/EngineCore.h>
 #include <EngineContents/ContentsCore.h>
 

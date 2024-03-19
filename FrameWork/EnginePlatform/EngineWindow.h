@@ -1,17 +1,5 @@
 #pragma once
 
-//std
-#include <string_view>
-#include <functional>
-
-//window
-#include "framework.h"
-#include "Resource.h"
-
-//myclass
-#include <EngineBase/EngineDebug.h>
-#include <EngineBase/EngineMath.h>
-
 class EngineWindow
 {
 public:

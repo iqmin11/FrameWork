@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include "EngineComponent.h"
 
 EngineComponent::EngineComponent()

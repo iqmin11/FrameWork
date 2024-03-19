@@ -1,13 +1,5 @@
 #pragma once
 
-//std
-#include <functional>
-#include <map>
-#include <memory>
-#include <typeinfo>
-
-//myClass
-#include <EngineBase/EngineString.h>
 #include <EnginePlatform/EngineWindow.h>
 
 class EngineLevel;

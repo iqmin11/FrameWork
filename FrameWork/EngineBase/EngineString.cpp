@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include "EngineString.h"
 
 std::string EngineString::ToUpper(std::string_view Str)

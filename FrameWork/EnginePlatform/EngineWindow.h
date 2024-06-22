@@ -14,7 +14,7 @@ public:
 	EngineWindow& operator=(EngineWindow&& _Other) noexcept = delete;
 
 	static void WindowCreate(HINSTANCE hInstance, std::string_view TitleName, const float4& StartPos = float4::Zero(), const float4& Size = DefaultWindowSize);
-	static void WindowLoop(std::function<void()> Begin, std::function<void()> Tick, std::function<void()> End);
+	static int WindowLoop(std::function<void()> Begin, std::function<void()> Tick, std::function<void()> End);
 	static void WinodwRelease();
 
 	static const float4& GetScreenSize()

@@ -31,7 +31,6 @@ public:
 		return Context;
 	}
 
-
 	inline static ID3D11RenderTargetView* GetRTV()
 	{
 		return MainRTV;

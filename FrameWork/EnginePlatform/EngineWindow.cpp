@@ -124,7 +124,7 @@ void EngineWindow::InitWndRect(const float4& Pos, const float4& Size)
 	SetWindowPos(hWnd, nullptr, WindowPos.ix(), WindowPos.iy(), WindowSize.ix(), WindowSize.iy(), SWP_NOZORDER);
 }
 
-void EngineWindow::WindowLoop(std::function<void()> Begin, std::function<void()> Tick, std::function<void()> End)
+int EngineWindow::WindowLoop(std::function<void()> Begin, std::function<void()> Tick, std::function<void()> End)
 {
 	if (Begin != nullptr)
 	{
@@ -135,7 +135,7 @@ void EngineWindow::WindowLoop(std::function<void()> Begin, std::function<void()>
 
 	while (bIsWindowUpdate)
 	{
-		if (GetMessage(&msg, nullptr, 0, 0))
+		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			if (Tick != nullptr)
 			{
@@ -144,6 +144,12 @@ void EngineWindow::WindowLoop(std::function<void()> Begin, std::function<void()>
 
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+			continue;
+		}
+
+		if (nullptr != Tick)
+		{
+			Tick();
 		}
 	}
 
@@ -151,6 +157,8 @@ void EngineWindow::WindowLoop(std::function<void()> Begin, std::function<void()>
 	{
 		End();
 	}
+
+	return (int)msg.wParam;
 }
 
 void EngineWindow::WinodwRelease()

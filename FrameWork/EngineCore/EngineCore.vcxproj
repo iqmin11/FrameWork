@@ -183,6 +183,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineGUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineLevel.h">
       <SubType>
       </SubType>
@@ -191,6 +195,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="imgui\imgui_impl_win32.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\imstb_rectpack.h" />
+    <ClInclude Include="imgui\imstb_textedit.h" />
+    <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="PrecompileHeader.h">
       <SubType>
       </SubType>
@@ -213,6 +225,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineGUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EngineLevel.cpp">
       <SubType>
       </SubType>
@@ -221,6 +237,13 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="PrecompileHeader.cpp">
       <SubType>
       </SubType>

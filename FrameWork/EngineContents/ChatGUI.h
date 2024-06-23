@@ -19,6 +19,7 @@ protected:
 	void Begin() override;
 	void Tick(float DeltaTime) override;
 private:
-
+	char InputBuffer[32] = "";
+	char OutputBuffer[32] = "";
 };
 

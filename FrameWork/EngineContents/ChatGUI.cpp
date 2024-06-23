@@ -15,14 +15,12 @@ void ChatGUI::Begin()
 
 void ChatGUI::Tick(float DeltaTime)
 {
-    static char buf[32] = "";
-    ImGui::InputText("Chat Input", buf, IM_ARRAYSIZE(buf));
+    ImGui::InputText("Chat Input", InputBuffer, IM_ARRAYSIZE(InputBuffer));
     
     if (ImGui::Button("Send"))
     {
-
+        _memccpy(OutputBuffer, InputBuffer, 0, sizeof(InputBuffer));
     }
-    ImGui::Text(buf);
-    
+    ImGui::Text(OutputBuffer);
 }
 

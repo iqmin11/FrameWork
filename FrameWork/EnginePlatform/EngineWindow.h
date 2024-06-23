@@ -27,6 +27,11 @@ public:
 		return hWnd;
 	}
 
+	inline static void SetUserMessageFunction(std::function<LRESULT(HWND _hWnd, UINT _message, WPARAM _wParam, LPARAM _lParam)> _UserMessageFunction)
+	{
+		UserMessageFunction = _UserMessageFunction;
+	}
+
 	static const float4 DefaultWindowPos;
 	static const float4 DefaultWindowSize;
 
@@ -45,7 +50,8 @@ private:
     static LRESULT CALLBACK MsgFunc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	static BOOL InitInstance(HINSTANCE hInstance, std::string_view TitleName);
 	static void InitWndRect(const float4& Pos, const float4& Size);
-	
+	static std::function<LRESULT(HWND _hWnd, UINT _message, WPARAM _wParam, LPARAM _lParam)> UserMessageFunction;
+
 	//SetWindowOption
 
 	static bool bIsWindowUpdate;

@@ -18,5 +18,6 @@ void TestLevel::Begin()
 
 void TestLevel::Tick(float DeltaTime)
 {
+	EngineLevel::Tick(DeltaTime);
 	int a = 0;
 }

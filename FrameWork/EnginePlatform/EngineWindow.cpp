@@ -11,6 +11,7 @@ const float4 EngineWindow::DefaultWindowPos = float4::Zero();
 const float4 EngineWindow::DefaultWindowSize = { 1600.f, 900.f, 0.f, 1.f };
 float4 EngineWindow::WindowPos = float4::Zero();
 float4 EngineWindow::WindowSize = EngineWindow::DefaultWindowSize;
+std::function<LRESULT(HWND _hWnd, UINT _message, WPARAM _wParam, LPARAM _lParam)> EngineWindow::UserMessageFunction;
 
 EngineWindow::EngineWindow()
 {
@@ -65,6 +66,14 @@ ATOM EngineWindow::MyRegisterClass(HINSTANCE hInstance)
 
 LRESULT EngineWindow::MsgFunc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	if (nullptr != UserMessageFunction)
+	{
+		if (0 != UserMessageFunction(hWnd, message, wParam, lParam))
+		{
+			return true;
+		}
+	}
+
 	switch (message)
 	{
 		// 내 윈도우가 선택되었다.

@@ -1,5 +1,6 @@
 #include "PrecompileHeader.h"
 
+#include "EngineBase/EngineTime.h"
 #include "EngineCore.h"
 #include "EngineLevel.h"
 #include "EngineDevice.h"
@@ -27,7 +28,7 @@ void EngineCore::CoreInit(HINSTANCE hInst, std::string_view TitleName, std::func
 
 void EngineCore::CoreTick()
 {
-	float TempTime = 0.f;
+	float TimeDeltaTime = EngineTime::GlobalTime.TimeCheck();
 
 	if (CurUpdatedLevel == nullptr)
 	{
@@ -35,7 +36,9 @@ void EngineCore::CoreTick()
 		return;
 	}
 
-	CurUpdatedLevel->Tick(TempTime);
+	EngineDevice::RenderStart();
+	CurUpdatedLevel->Tick(TimeDeltaTime);
+	EngineDevice::RenderEnd();
 	int a = 0;
 }
 

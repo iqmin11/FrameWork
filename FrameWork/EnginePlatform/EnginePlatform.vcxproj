@@ -167,7 +167,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EngineClient.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineServer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineWindow.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineWinSocket.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -180,7 +192,19 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EngineClient.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineServer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EngineWindow.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineWinSocket.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -19,7 +19,7 @@ void ChatGUI::Tick(float DeltaTime)
     
     if (ImGui::Button("Send"))
     {
-        _memccpy(OutputBuffer, InputBuffer, 0, sizeof(InputBuffer));
+        memcpy_s(OutputBuffer, sizeof(OutputBuffer), InputBuffer, sizeof(InputBuffer));
     }
     ImGui::Text(OutputBuffer);
 }

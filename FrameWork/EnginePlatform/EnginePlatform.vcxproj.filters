@@ -16,6 +16,9 @@
     <ClInclude Include="PrecompileHeader.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="EngineWinSocket.h" />
+    <ClInclude Include="EngineServer.h" />
+    <ClInclude Include="EngineClient.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -35,6 +38,9 @@
     <ClCompile Include="PrecompileHeader.cpp">
       <Filter>Header</Filter>
     </ClCompile>
+    <ClCompile Include="EngineWinSocket.cpp" />
+    <ClCompile Include="EngineServer.cpp" />
+    <ClCompile Include="EngineClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint">

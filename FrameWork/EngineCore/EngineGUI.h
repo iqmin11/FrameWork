@@ -9,20 +9,19 @@ class EngineGUIWindow : public EngineObject, public std::enable_shared_from_this
 	friend class EngineGUI;
 
 private:
-	void Begin()
+	void UIBegin()
 	{
 		std::string_view View = GetName();
-
 		ImGui::Begin(View.data());
 	}
-	void End()
+	void UIEnd()
 	{
 		ImGui::End();
 	}
 
 public:
-	virtual void Start() {}
-	virtual void OnGUI(std::shared_ptr<class GameEngineLevel> Level, float _DeltaTime) = 0;
+	bool IsOn = true;
+	void Begin() override {}
 };
 
 // Ό³Έν :
@@ -57,7 +56,7 @@ public:
 		std::shared_ptr<EngineGUIWindow> WindowPtr;
 		AllWindow[UpperString] = WindowPtr = std::make_shared<WindowType>();
 		WindowPtr->SetName(UpperString);
-		WindowPtr->Start();
+		WindowPtr->Begin();
 
 		return WindowPtr;
 	}

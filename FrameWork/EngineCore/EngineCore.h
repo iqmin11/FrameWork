@@ -47,6 +47,8 @@ public:
 			return nullptr;
 		}
 
+		NewLevel->Begin();
+
 		return std::dynamic_pointer_cast<LevelType>(NewLevel);
 	}
 

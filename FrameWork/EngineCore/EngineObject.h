@@ -21,7 +21,7 @@ public:
 	{
 		return Name.c_str();
 	}
-
+	
 protected:
 
 	virtual void Begin() = 0;

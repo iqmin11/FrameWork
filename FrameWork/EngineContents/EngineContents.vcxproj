@@ -167,6 +167,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ChatGUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ChatLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsCore.h">
       <SubType>
       </SubType>
@@ -175,16 +183,16 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TestGUI.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TestLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChatGUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ChatLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
       <SubType>
       </SubType>
@@ -196,14 +204,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="TestGUI.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
-      <SubType>
-      </SubType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

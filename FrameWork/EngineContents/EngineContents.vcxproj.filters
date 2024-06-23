@@ -1,24 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="TestLevel.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="PrecompileHeader.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="TestGUI.h" />
+    <ClInclude Include="ChatLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatGUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestLevel.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PrecompileHeader.cpp">
       <Filter>Header</Filter>
     </ClCompile>
-    <ClCompile Include="TestGUI.cpp" />
+    <ClCompile Include="ChatLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatGUI.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
       <UniqueIdentifier>{aac66d8d-f954-4700-ae85-71d521c7afbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{356a0647-84d4-4fc5-af22-4fdd4965ba2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{af3dbdbf-0cdc-4fb8-a77d-041b3df0b361}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #include "PrecompileHeader.h"
 #include "ContentsCore.h"
-#include "TestLevel.h"
+#include "ChatLevel.h"
 
 ContentsCore::ContentsCore()
 {
@@ -14,8 +14,8 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::ContentsBegin()
 {
-	CreateLevel<TestLevel>();
-	ChangeLevel("TestLevel");
+	CreateLevel<ChatLevel>();
+	ChangeLevel("ChatLevel");
 }
 
 void ContentsCore::ContentsEnd()

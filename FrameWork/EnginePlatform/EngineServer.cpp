@@ -7,6 +7,10 @@ EngineServer::EngineServer()
 
 EngineServer::~EngineServer() 
 {
+	if (AcceptSocket != 0)
+	{
+		closesocket(AcceptSocket);
+	}
 }
 
 void EngineServer::ServerOpen(short _Port, int _BackLog)
@@ -48,16 +52,44 @@ void EngineServer::ServerOpen(short _Port, int _BackLog)
 		return;
 	}
 
-	ServerThread.Start("AcceptFunction", std::bind(EngineServer::AcceptThread, AcceptSocket, this));
+	AcceptThread.Start("AcceptFunction", std::bind(EngineServer::AcceptThreadFunc, AcceptSocket, this));
 }
 
-void EngineServer::Send(void* SendData, unsigned int Size)
+void EngineServer::Send(const char* SendData, unsigned int Size)
 {
-	int a = 0;
+	for (auto User : Users)
+	{
+		::send(User.second, SendData, Size, 0);
+	}
 }
 
-void EngineServer::AcceptThread(SOCKET _AcceptSocket, EngineServer* _Net)
+void EngineServer::AcceptThreadFunc(SOCKET _AcceptSocket, EngineServer* _Net)
 {
-	int a = 0;
+	int AddressLen = sizeof(SOCKADDR_IN);
+	while (true == _Net->IsNet())
+	{
+		SOCKADDR_IN ClientAdd;
+
+		memset(&ClientAdd, 0, sizeof(ClientAdd));
+
+		SOCKET CientSocket = accept(_AcceptSocket, (sockaddr*)&ClientAdd, &AddressLen);
+
+		if (SOCKET_ERROR == CientSocket || INVALID_SOCKET == CientSocket)
+		{
+			return;
+		}
+
+		// 이 유저가 접속했을때 꼭 해야할께 있을 가능성이 높은데.
+
+		std::shared_ptr<EngineThread> NewThread = std::make_shared<EngineThread>();
+		_Net->ReciveThreads.push_back(NewThread);
+
+		std::string ThreadName = std::to_string(CientSocket);
+		ThreadName += "Server Recv Thread";
+
+		_Net->AccpetCallBack(CientSocket, _Net);
+
+		NewThread->Start(ThreadName, std::bind(&EngineNetwork::ReciveThreadFunction, CientSocket, _Net));
+	}
 }
 

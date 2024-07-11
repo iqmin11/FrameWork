@@ -28,6 +28,9 @@
     <ClInclude Include="EngineThread.h">
       <Filter>Thread</Filter>
     </ClInclude>
+    <ClInclude Include="EnginePacket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -64,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="EngineThread.cpp">
       <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePacket.cpp">
+      <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

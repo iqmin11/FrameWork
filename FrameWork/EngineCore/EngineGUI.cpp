@@ -2,6 +2,7 @@
 #include "EngineGUI.h"
 #include "EnginePlatform/EngineWindow.h"
 #include "EngineCore/EngineDevice.h"
+#include "EngineLevel.h"
 
 std::map<std::string, std::shared_ptr<EngineGUIWindow>> EngineGUI::AllWindow;
 
@@ -61,7 +62,7 @@ void EngineGUI::Initalize()
     clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 }
 
-void EngineGUI::Tick(float DelteTime)
+void EngineGUI::Tick(float DelteTime, std::shared_ptr<EngineLevel> CurLevel)
 {
     // Start the Dear ImGui frame
     ImGui_ImplDX11_NewFrame();
@@ -76,7 +77,7 @@ void EngineGUI::Tick(float DelteTime)
         }
 
         GuiWindow.second->UIBegin();
-        GuiWindow.second->Tick(DelteTime);
+        GuiWindow.second->Tick(DelteTime, CurLevel);
         GuiWindow.second->UIEnd();
     }
 

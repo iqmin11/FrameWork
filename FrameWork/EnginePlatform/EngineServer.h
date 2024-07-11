@@ -18,19 +18,26 @@ public:
 
 	void ServerOpen(short Port, int BackLog = 512);
 
-	void Send(void* SendData, unsigned int Size) override;
+	void SetAcceptCallback(std::function<void(SOCKET, EngineServer*)> CallbackFunc)
+	{
+		AccpetCallBack = CallbackFunc;
+	}
 
 protected:
+	void Send(const char* SendData, unsigned int Size) override;
 
 private:
 	int BackLog = 512;
 	SOCKET AcceptSocket = 0;
 
-	EngineThread ServerThread;
+	EngineThread AcceptThread;
+	std::vector<std::shared_ptr<EngineThread>> ReciveThreads;
 
 	std::map<int, SOCKET> Users;
 
-	static void AcceptThread(SOCKET _AcceptSocket, EngineServer* _Net);
+	std::function<void(SOCKET _AcceptSocket, EngineServer* _Net)> AccpetCallBack;
+
+	static void AcceptThreadFunc(SOCKET _AcceptSocket, EngineServer* _Net);
 
 
 };

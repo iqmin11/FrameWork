@@ -14,7 +14,7 @@ public:
 	EngineNetwork& operator=(const EngineNetwork& _Other) = delete;
 	EngineNetwork& operator=(EngineNetwork&& _Other) noexcept = delete;
 
-	virtual void Send(void* SendData, unsigned int Size) = 0;
+	virtual void Send(const char* SendData, unsigned int Size) = 0;
 
 	inline bool IsNet() const
 	{

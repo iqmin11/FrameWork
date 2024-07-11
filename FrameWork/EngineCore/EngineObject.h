@@ -1,5 +1,5 @@
 #pragma once
-class EngineObject
+class EngineObject : public std::enable_shared_from_this<EngineObject>
 {
 public:
 	// construtor destructor
@@ -25,7 +25,7 @@ public:
 protected:
 
 	virtual void Begin() = 0;
-	virtual void Tick(float DeltaTime) = 0;
+	virtual void Tick(float DeltaTime) {};
 
 private:
 	std::string Name = "";

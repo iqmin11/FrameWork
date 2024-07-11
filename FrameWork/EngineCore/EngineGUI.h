@@ -22,6 +22,7 @@ private:
 public:
 	bool IsOn = true;
 	void Begin() override {}
+	virtual void Tick(float DeltaTime, std::shared_ptr<class EngineLevel> CurLevel) {};
 };
 
 // Ό³Έν :
@@ -39,7 +40,7 @@ public:
 	EngineGUI& operator=(EngineGUI&& _Other) noexcept = delete;
 
 	static void Initalize();
-	static void Tick(float DelteTime);
+	static void Tick(float DelteTime, std::shared_ptr<EngineLevel> CurLevel);
 	static void Release();
 
 	template<typename WindowType>

@@ -53,7 +53,18 @@ bool EngineClient::Connect(const std::string& _IP, unsigned short _Port)
     return true;
 }
 
-void EngineClient::Send(void* Data, unsigned int Size)
+void EngineClient::Send(const char* Data, unsigned int Size)
 {
+    if (Data == nullptr)
+    {
+        MsgAssert("Data is nullptr.");
+    }
+
+    if (Size == 0)
+    {
+        MsgAssert("Data Size is Zero.");
+    }
+
+    ::send(ClientSocket, Data, Size, 0);
 }
 

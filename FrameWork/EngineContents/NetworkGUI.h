@@ -19,8 +19,9 @@ public:
 
 protected:
 	void Begin() override;
-	void Tick(float DeltaTime) override;
+	void Tick(float DeltaTime, std::shared_ptr<class EngineLevel> CurLevel) override;
 
+	void ServerInit(std::shared_ptr<class EngineLevel> CurLevel);
 
 private:
 

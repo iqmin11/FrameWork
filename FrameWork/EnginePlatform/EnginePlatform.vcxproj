@@ -175,6 +175,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EnginePacket.h" />
     <ClInclude Include="EngineServer.h">
       <SubType>
       </SubType>
@@ -204,6 +205,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EnginePacket.cpp" />
     <ClCompile Include="EngineServer.cpp">
       <SubType>
       </SubType>

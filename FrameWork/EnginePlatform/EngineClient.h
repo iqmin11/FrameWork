@@ -19,7 +19,7 @@ public:
 	bool Connect(const std::string& _IP, unsigned short _Port);
 
 protected:
-	void Send(void* Data, unsigned int Size) override;
+	void Send(const char* Data, unsigned int Size) override;
 
 private:
 	EngineThread ReciveThread;

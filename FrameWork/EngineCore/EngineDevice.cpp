@@ -150,13 +150,11 @@ void EngineDevice::CreateSwapChain()
 	Device->CreateRenderTargetView(BackBuffer, nullptr, &MainRTV);
 	BackBuffer->Release();
 	BackBuffer = nullptr;
-
-
 }
 
 void EngineDevice::RenderStart()
 {
-	const float4 clear_color = { 0.45f, 0.55f, 0.60f, 1.00f };
+	const static float4 clear_color = { 0.45f, 0.55f, 0.60f, 1.00f };
 	EngineDevice::GetContext()->ClearRenderTargetView(EngineDevice::GetRTV(), clear_color.Arr1D);
 	EngineDevice::GetContext()->OMSetRenderTargets(1, EngineDevice::GetRTVRef(), nullptr);
 }
@@ -170,7 +168,6 @@ void EngineDevice::RenderEnd()
 		MsgAssert("랜더타겟 생성에 실패했습니다.");
 		return;
 	}
-
 }
 
 

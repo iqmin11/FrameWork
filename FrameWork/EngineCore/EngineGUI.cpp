@@ -82,9 +82,6 @@ void EngineGUI::Tick(float DelteTime)
 
     // Rendering
     ImGui::Render();
-    const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
-    EngineDevice::GetContext()->OMSetRenderTargets(1, EngineDevice::GetRTVRef(), nullptr);
-    EngineDevice::GetContext()->ClearRenderTargetView(EngineDevice::GetRTV(), clear_color_with_alpha);
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 

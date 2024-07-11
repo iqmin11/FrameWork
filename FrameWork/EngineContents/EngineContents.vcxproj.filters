@@ -11,6 +11,9 @@
     <ClInclude Include="ChatGUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkGUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -21,6 +24,9 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ChatGUI.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkGUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,6 +8,7 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="EngineTime.h" />
+    <ClInclude Include="EngineSerializer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp" />
@@ -17,6 +18,7 @@
       <Filter>Header</Filter>
     </ClCompile>
     <ClCompile Include="EngineTime.cpp" />
+    <ClCompile Include="EngineSerializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">

@@ -1,7 +1,8 @@
 #pragma once
+#include "EngineNetwork.h"
 
 // Ό³Έν :
-class EngineServer
+class EngineServer : public EngineNetwork
 {
 public:
 	// constrcuter destructer

@@ -16,9 +16,15 @@
     <ClInclude Include="PrecompileHeader.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="EngineWinSocket.h" />
-    <ClInclude Include="EngineServer.h" />
-    <ClInclude Include="EngineClient.h" />
+    <ClInclude Include="EngineClient.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineServer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineNetwork.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -30,6 +36,9 @@
     <Filter Include="Header\WindowDefaultHeader">
       <UniqueIdentifier>{3ac4c879-6501-4f99-b005-2912e00aeecd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{3f042f78-39e5-489d-8cf8-c123f204c9f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineWindow.cpp">
@@ -38,9 +47,15 @@
     <ClCompile Include="PrecompileHeader.cpp">
       <Filter>Header</Filter>
     </ClCompile>
-    <ClCompile Include="EngineWinSocket.cpp" />
-    <ClCompile Include="EngineServer.cpp" />
-    <ClCompile Include="EngineClient.cpp" />
+    <ClCompile Include="EngineClient.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineServer.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineNetwork.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint">

@@ -25,6 +25,9 @@
     <ClInclude Include="EngineNetwork.h">
       <Filter>Network</Filter>
     </ClInclude>
+    <ClInclude Include="EngineThread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -38,6 +41,9 @@
     </Filter>
     <Filter Include="Network">
       <UniqueIdentifier>{3f042f78-39e5-489d-8cf8-c123f204c9f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{ac511bb6-c588-4bda-8e5f-b7a4e5c4e9fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="EngineNetwork.cpp">
       <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineThread.cpp">
+      <Filter>Thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

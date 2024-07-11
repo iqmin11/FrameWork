@@ -11,3 +11,11 @@ std::string EngineString::ToUpper(std::string_view Str)
 
 	return result;
 }
+
+std::wstring EngineString::AsciiToUnicode(const std::string& Str)
+{
+	int size_needed = MultiByteToWideChar(CP_ACP, 0, Str.c_str(), (int)Str.size(), NULL, 0);
+	std::wstring WName(size_needed, 0);
+	::MultiByteToWideChar(CP_ACP, 0, Str.c_str(), (int)Str.size(), &WName[0], size_needed);
+	return WName;
+}

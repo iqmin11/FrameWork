@@ -2,8 +2,10 @@
 #include <string>
 #include <string_view>
 
-namespace EngineString
+class EngineString
 {
-	std::string ToUpper(std::string_view Str);
+public:
+	static std::string ToUpper(std::string_view Str);
+	static std::wstring AsciiToUnicode(const std::string& Str);
 };
 

@@ -36,7 +36,7 @@ void NetworkGUI::Tick(float DeltaTime, std::shared_ptr<EngineLevel> CurLevel)
 		Text = "SendTest";
 		if (ImGui::Button(Text.c_str()))
 		{
-			int StrLen = strlen(TestSendBuffer.c_str());
+			int StrLen = static_cast<int>(strlen(TestSendBuffer.c_str()));
 			NetInst->Send(&TestSendBuffer[0], StrLen);
 		}
 		ImGui::PopID();
@@ -58,7 +58,7 @@ void NetworkGUI::Tick(float DeltaTime, std::shared_ptr<EngineLevel> CurLevel)
 		Text = "SendTest";
 		if (ImGui::Button(Text.c_str()))
 		{
-			int StrLen = strlen(TestSendBuffer.c_str());
+			int StrLen = static_cast<int>(strlen(TestSendBuffer.c_str()));
 
 			// TestSendBuffer = Arr;
 			NetInst->Send(&TestSendBuffer[0], StrLen);

@@ -39,7 +39,10 @@ void EngineCore::CoreTick()
 
 	EngineDevice::RenderStart();
 	CurUpdatedLevel->Tick(TimeDeltaTime);
+	CurUpdatedLevel->ActorUpdate(TimeDeltaTime);
 	EngineDevice::RenderEnd();
+
+	CurUpdatedLevel->ActorRelease();
 }
 
 void EngineCore::EngineBegin(std::function<void()> ContentsBegin)

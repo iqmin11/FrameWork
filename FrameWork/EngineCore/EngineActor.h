@@ -1,8 +1,10 @@
 #pragma once
 #include "EngineObject.h"
+#include "EngineLevel.h"
 
 class EngineActor : public EngineObject
 {
+	friend class EngineLevel;
 public:
 	// construtor destructor
 	EngineActor();

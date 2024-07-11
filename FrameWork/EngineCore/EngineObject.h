@@ -21,6 +21,12 @@ public:
 	{
 		return Name.c_str();
 	}
+
+	bool IsDeath() const
+	{
+		return bIsDeath;
+	}
+
 	
 protected:
 
@@ -29,5 +35,6 @@ protected:
 
 private:
 	std::string Name = "";
+	bool bIsDeath = false;
 };
 

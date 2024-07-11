@@ -1,5 +1,7 @@
 #pragma once
 #include "EngineCore/EngineGUI.h"
+#include "EnginePlatform/EngineServer.h"
+#include "EnginePlatform/EngineClient.h"
 
 // Ό³Έν :
 class NetworkGUI : public EngineGUIWindow
@@ -22,10 +24,15 @@ protected:
 
 private:
 
-	bool IsServer;
+	static EngineNetwork* NetInst;
+	EngineServer Server;
+	EngineClient Client;
+
+	bool IsServer = false;
 	std::string IP = "127.0.0.1";
 	int Port = 30000;
-	bool IsClient;
+
+	bool IsClient = false;
 	std::string TestSendBuffer = "fashdjklfhajklfhasdjfhaklfhafhasd";
 };
 

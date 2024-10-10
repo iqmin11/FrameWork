@@ -31,6 +31,9 @@
     <ClInclude Include="EnginePacket.h">
       <Filter>Network</Filter>
     </ClInclude>
+    <ClInclude Include="EngineNetObject.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -69,6 +72,9 @@
       <Filter>Thread</Filter>
     </ClCompile>
     <ClCompile Include="EnginePacket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineNetObject.cpp">
       <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,4 +1,5 @@
 #pragma once
+
 class EngineObject : public std::enable_shared_from_this<EngineObject>
 {
 public:
@@ -17,7 +18,7 @@ public:
 		Name = _Name;
 	}
 
-	std::string_view GetName()
+	std::string_view GetName() const
 	{
 		return Name.c_str();
 	}

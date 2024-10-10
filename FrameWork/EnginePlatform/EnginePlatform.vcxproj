@@ -171,6 +171,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineNetObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineNetwork.h">
       <SubType>
       </SubType>
@@ -198,6 +202,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineClient.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineNetObject.cpp">
       <SubType>
       </SubType>
     </ClCompile>

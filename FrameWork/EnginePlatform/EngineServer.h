@@ -23,6 +23,17 @@ public:
 		AccpetCallBack = CallbackFunc;
 	}
 
+	void AddUser(int _ID, SOCKET _UserSocket)
+	{
+		if (true == Users.contains(_ID))
+		{
+			MsgAssert("이미 존재하는 유저가 또 존재할수는 없습니다 ID 오류 입니다.");
+			return;
+		}
+
+		Users[_ID] = _UserSocket;
+	}
+
 protected:
 	void Send(const char* SendData, unsigned int Size) override;
 

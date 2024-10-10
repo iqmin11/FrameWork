@@ -30,7 +30,7 @@ public:
 			Name.replace(0, 6, "");
 		}
 
-		ActorInit(NewActor, _Order, this);
+		ActorInit(NewActor, _Order);
 
 		return std::dynamic_pointer_cast<ActorType>(NewActor);
 	}
@@ -41,7 +41,7 @@ protected:
 
 private:
 	std::map<int, std::vector<std::shared_ptr<EngineActor>>> Actors;
-	void ActorInit(std::shared_ptr<EngineActor> _Actor);
+	void ActorInit(std::shared_ptr<EngineActor> _Actor, int _Order);
 	void ActorUpdate(float _DeltaTime);
 	void ActorRelease();
 };

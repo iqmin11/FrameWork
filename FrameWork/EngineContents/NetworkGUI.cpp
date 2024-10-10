@@ -1,6 +1,8 @@
 #include "PrecompileHeader.h"
 #include "NetworkGUI.h"
 #include "EngineCore/EngineLevel.h"
+#include "ChatUser.h"
+#include "ChatLevel.h"
 
 EngineNetwork* NetworkGUI::NetInst = nullptr;
 
@@ -27,13 +29,14 @@ void NetworkGUI::Tick(float DeltaTime, std::shared_ptr<EngineLevel> CurLevel)
 	{
 		Text = "Server Mode";
 		ImGui::Text(Text.c_str());
-		
+
+		Text = "SendTest";
 		ImGui::PushID(321312321);
 		ImGui::InputText(Text.c_str(), &TestSendBuffer[0], TestSendBuffer.size());
 		ImGui::PopID();
 
-		ImGui::PushID(33333121);
 		Text = "SendTest";
+		ImGui::PushID(33333121);
 		if (ImGui::Button(Text.c_str()))
 		{
 			int StrLen = static_cast<int>(strlen(TestSendBuffer.c_str()));
@@ -77,7 +80,7 @@ void NetworkGUI::Tick(float DeltaTime, std::shared_ptr<EngineLevel> CurLevel)
 		Server.ServerOpen(static_cast<unsigned short>(Port));
 		ServerInit(CurLevel);
 		IsServer = true;
-		//ChatUser::MainUser->InitServerObject();
+		ChatUser::MainChatUser->InitServerObject();
 		NetInst = &Server;
 	}
 

@@ -21,8 +21,9 @@ void EngineLevel::Tick(float DeltaTime)
 	EngineGUI::Tick(DeltaTime, std::static_pointer_cast<EngineLevel>(this->shared_from_this()));
 }
 
-void EngineLevel::ActorInit(std::shared_ptr<EngineActor> _Actor)
+void EngineLevel::ActorInit(std::shared_ptr<EngineActor> _Actor, int _Order)
 {
+	this->Actors[_Order].push_back(_Actor);
 	_Actor->Begin();
 }
 

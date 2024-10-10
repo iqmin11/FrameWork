@@ -13,7 +13,7 @@ public:
 	EngineWindow& operator=(const EngineWindow& _Other) = delete;
 	EngineWindow& operator=(EngineWindow&& _Other) noexcept = delete;
 
-	static void WindowCreate(HINSTANCE hInstance, std::string_view TitleName, const float4& StartPos = float4::Zero(), const float4& Size = DefaultWindowSize);
+	static void WindowCreate(HINSTANCE hInstance, std::string_view TitleName, const float4& StartPos = float4::ZERO, const float4& Size = DefaultWindowSize);
 	static int WindowLoop(std::function<void()> Begin, std::function<void()> Tick, std::function<void()> End);
 	static void WinodwRelease();
 

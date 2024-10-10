@@ -7,9 +7,9 @@ HINSTANCE EngineWindow::hInst;
 HWND EngineWindow::hWnd;
 HDC EngineWindow::hDC;
 bool EngineWindow::bIsWindowUpdate = false;
-const float4 EngineWindow::DefaultWindowPos = float4::Zero();
+const float4 EngineWindow::DefaultWindowPos = float4::ZERO;
 const float4 EngineWindow::DefaultWindowSize = { 1600.f, 900.f, 0.f, 1.f };
-float4 EngineWindow::WindowPos = float4::Zero();
+float4 EngineWindow::WindowPos = float4::ZERO;
 float4 EngineWindow::WindowSize = EngineWindow::DefaultWindowSize;
 std::function<LRESULT(HWND _hWnd, UINT _message, WPARAM _wParam, LPARAM _lParam)> EngineWindow::UserMessageFunction;
 

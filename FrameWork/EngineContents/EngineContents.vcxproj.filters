@@ -15,6 +15,9 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="ChatUser.h" />
+    <ClInclude Include="GraphicTestLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -31,6 +34,9 @@
       <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="ChatUser.cpp" />
+    <ClCompile Include="GraphicTestLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">

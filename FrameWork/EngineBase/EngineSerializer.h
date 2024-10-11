@@ -17,6 +17,21 @@ public:
 	void Write(const void* SorceData, unsigned int Size);
 	void Read(void* DestData, unsigned int Size);
 
+	const unsigned char* GetConstData() const
+	{
+		return &Buffer[0];
+	}
+
+	const unsigned int GetReadOffset() const
+	{
+		return ReadOffset;
+	}
+
+	const unsigned int GetWriteOffset() const
+	{
+		return WriteOffset;
+	}
+
 protected:
 
 private:

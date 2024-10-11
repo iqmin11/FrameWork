@@ -64,9 +64,15 @@ std::string EnginePath::GetExtension() const
 	return Path.extension().string();
 }
 
-void EnginePath::MoveParent()
+bool EnginePath::TryMoveParent()
 {
+	if (IsRoot())
+	{
+		return false;
+	}
+
 	Path = Path.parent_path();
+	return true;
 }
 
 void EnginePath::MoveParentToChildPath(std::string_view _String)
@@ -78,7 +84,7 @@ void EnginePath::MoveParentToChildPath(std::string_view _String)
 			return;
 		}
 
-		MoveParent();
+		TryMoveParent();
 	}
 
 	MsgAssert("이런 경로를 자식으로 가진 부모는 존재하지 않습니다.");

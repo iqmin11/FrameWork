@@ -8,7 +8,7 @@ public:
 	EnginePath();
 	EnginePath(std::filesystem::path _Path);
 	EnginePath(const std::string& _Path);
-	~EnginePath();
+	virtual ~EnginePath();
 
 	// delete Function
 	EnginePath(const EnginePath& _Other);
@@ -23,7 +23,7 @@ public:
 	std::string GetFullPath() const;
 	std::string GetExtension() const;
 
-	void MoveParent();
+	virtual bool TryMoveParent();
 
 	// 내자식중 특정 경로나 특정 파일이 있는곳까지 자동 move
 	void MoveParentToChildPath(std::string_view _String);
@@ -43,9 +43,6 @@ public:
 
 protected:
 
-private:
-	// 고생고생해서 만들지 않게 되었습니다.
-	// std::string Path;
 	std::filesystem::path Path;
 
 };

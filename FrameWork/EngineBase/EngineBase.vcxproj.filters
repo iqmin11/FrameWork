@@ -12,6 +12,12 @@
     <ClInclude Include="EnginePath.h">
       <Filter>FileIO</Filter>
     </ClInclude>
+    <ClInclude Include="EngineFile.h">
+      <Filter>FileIO</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDirectory.h">
+      <Filter>FileIO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp" />
@@ -23,6 +29,12 @@
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="EngineSerializer.cpp" />
     <ClCompile Include="EnginePath.cpp">
+      <Filter>FileIO</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineFile.cpp">
+      <Filter>FileIO</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDirectory.cpp">
       <Filter>FileIO</Filter>
     </ClCompile>
   </ItemGroup>

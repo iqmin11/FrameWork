@@ -11,6 +11,10 @@ ID3D11DeviceContext* EngineDevice::Context = nullptr;
 IDXGISwapChain* EngineDevice::SwapChain = nullptr;
 ID3D11Texture2D* EngineDevice::BackBuffer = nullptr;
 ID3D11RenderTargetView* EngineDevice::MainRTV = nullptr;
+ID3D11Texture2D* EngineDevice::DepthStencileBuffer = nullptr;
+ID3D11DepthStencilView* EngineDevice::MainDSV = nullptr;
+
+
 
 EngineDevice::EngineDevice()
 {
@@ -18,6 +22,11 @@ EngineDevice::EngineDevice()
 
 EngineDevice::~EngineDevice()
 {
+}
+
+void EngineDevice::Draw()
+{
+
 }
 
 IDXGIAdapter* EngineDevice::GetHighPerformanceAdapter()
@@ -148,8 +157,41 @@ void EngineDevice::CreateSwapChain()
 	}
 
 	Device->CreateRenderTargetView(BackBuffer, nullptr, &MainRTV);
+	
 	BackBuffer->Release();
 	BackBuffer = nullptr;
+}
+
+void EngineDevice::CreateDepthStencil()
+{
+	float4 ScreenSize = EngineWindow::GetScreenSize();
+
+	D3D11_TEXTURE2D_DESC DepthStencilDesc = { 0, };
+	DepthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
+	DepthStencilDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
+	DepthStencilDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+	DepthStencilDesc.Width = static_cast<UINT>(ScreenSize.ix());
+	DepthStencilDesc.Height = static_cast<UINT>(ScreenSize.iy());
+	DepthStencilDesc.ArraySize = 1;
+	DepthStencilDesc.SampleDesc.Count = 1;
+	DepthStencilDesc.SampleDesc.Quality = 0;
+
+	HRESULT Result = Device->CreateTexture2D(&DepthStencilDesc, nullptr, &DepthStencileBuffer);
+	if (FAILED(Result))
+	{
+		MsgAssert("뎁스스텐실버퍼 생성에 실패했습니다.");
+		return;
+	}
+
+	Result = Device->CreateDepthStencilView(DepthStencileBuffer, nullptr, &MainDSV);
+	if (FAILED(Result))
+	{
+		MsgAssert("뎁스스텐실뷰 생성에 실패했습니다.");
+		return;
+	}
+
+	int a = 0;
+
 }
 
 void EngineDevice::RenderStart()
@@ -233,6 +275,7 @@ void EngineDevice::Initialize()
 	Result = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 
 	CreateSwapChain();
+	CreateDepthStencil();
 }
 
 void EngineDevice::Release()
@@ -242,6 +285,19 @@ void EngineDevice::Release()
 		BackBuffer->Release();
 		BackBuffer = nullptr;
 	}
+
+	if (nullptr != DepthStencileBuffer)
+	{
+		DepthStencileBuffer->Release();
+		DepthStencileBuffer = nullptr;
+	}
+
+	if (nullptr != MainDSV)
+	{
+		MainDSV->Release();
+		MainDSV = nullptr;
+	}
+
 	//BackBufferTarget = nullptr;
 	if (nullptr != MainRTV)
 	{

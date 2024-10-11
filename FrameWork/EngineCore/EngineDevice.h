@@ -14,6 +14,7 @@ public:
 	static void Initialize();
 
 	static void CreateSwapChain();
+	static void CreateDepthStencil();
 
 	static void Release();
 
@@ -46,6 +47,8 @@ public:
 		return BackBuffer;
 	}
 
+	static void Draw();
+
 	// HWND
 protected:
 
@@ -55,8 +58,14 @@ private:
 	static ID3D11DeviceContext* Context;
 	static IDXGISwapChain* SwapChain;
 	static IDXGIAdapter* GetHighPerformanceAdapter();
+	
 	static ID3D11Texture2D* BackBuffer;
 	static ID3D11RenderTargetView* MainRTV;
+
+	static ID3D11Texture2D* DepthStencileBuffer;
+	static ID3D11DepthStencilView* MainDSV;
+
+	//static ID3D11SamplerState Samplers;
 
 	// constrcuter destructer
 	EngineDevice();

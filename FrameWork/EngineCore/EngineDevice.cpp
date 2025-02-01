@@ -411,6 +411,32 @@ void EngineDevice::Initialize()
 
 void EngineDevice::Release()
 {
+	//TestTriAngleResorece
+	if (nullptr != VertexShader)
+	{
+		VertexShader->Release();
+		VertexShader = nullptr;
+	}
+
+	if (nullptr != PixelShader)
+	{
+		PixelShader->Release();
+		PixelShader = nullptr;
+	}
+
+	if (nullptr != InputLayout)
+	{
+		InputLayout->Release();
+		InputLayout = nullptr;
+	}
+
+	if (nullptr != VertexBuffer)
+	{
+		VertexBuffer->Release();
+		VertexBuffer = nullptr;
+	}
+
+	//RealLogic
 	if (nullptr != BackBuffer)
 	{
 		BackBuffer->Release();
@@ -429,7 +455,6 @@ void EngineDevice::Release()
 		MainDSV = nullptr;
 	}
 
-	//BackBufferTarget = nullptr;
 	if (nullptr != MainRTV)
 	{
 		MainRTV->Release();

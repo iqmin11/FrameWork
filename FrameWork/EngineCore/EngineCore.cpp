@@ -37,12 +37,12 @@ void EngineCore::CoreTick()
 		return;
 	}
 
-	EngineDevice::RenderStart();
 	CurUpdatedLevel->Tick(TimeDeltaTime);
 	CurUpdatedLevel->ActorUpdate(TimeDeltaTime);
-	EngineDevice::Draw();
 
-	EngineDevice::RenderEnd();
+	//EngineDevice::RenderStart();
+	EngineDevice::Draw();
+	//EngineDevice::RenderEnd();
 
 	CurUpdatedLevel->ActorRelease();
 }

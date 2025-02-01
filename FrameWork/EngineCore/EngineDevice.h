@@ -14,6 +14,7 @@ public:
 	static void Initialize();
 
 	static void CreateSwapChain();
+	static void CreateResorces();
 	static void CreateDepthStencil();
 
 	static void Release();
@@ -64,6 +65,16 @@ private:
 
 	static ID3D11Texture2D* DepthStencileBuffer;
 	static ID3D11DepthStencilView* MainDSV;
+
+	//Resorces 
+	static ID3D11VertexShader* VertexShader;
+	static ID3D11PixelShader* PixelShader;
+	static ID3D11InputLayout* InputLayout;
+	static ID3D11Buffer* VertexBuffer;
+	static UINT NumVerts;
+	static UINT Stride;
+	static UINT Offset;
+
 
 	//static ID3D11SamplerState Samplers;
 

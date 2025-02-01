@@ -118,5 +118,13 @@
     <Filter Include="GUI\imgui">
       <UniqueIdentifier>{2004e405-f211-401b-955f-8267ed3d6a06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{d3c5ed7c-cfd3-4fa0-ab5a-025fbb7abe43}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="EngineShader.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

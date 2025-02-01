@@ -1,10 +1,11 @@
 #include "PrecompileHeader.h"
 #include "EngineDevice.h"
 #include <EnginePlatform/EngineWindow.h>
+#include <d3dcompiler.h>
 
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
-
+#pragma comment(lib, "d3dcompiler.lib")
 
 ID3D11Device1* EngineDevice::Device = nullptr;
 ID3D11DeviceContext1* EngineDevice::Context = nullptr;
@@ -13,6 +14,13 @@ ID3D11Texture2D* EngineDevice::BackBuffer = nullptr;
 ID3D11RenderTargetView* EngineDevice::MainRTV = nullptr;
 ID3D11Texture2D* EngineDevice::DepthStencileBuffer = nullptr;
 ID3D11DepthStencilView* EngineDevice::MainDSV = nullptr;
+ID3D11VertexShader* EngineDevice::VertexShader = nullptr;
+ID3D11PixelShader* EngineDevice::PixelShader = nullptr;
+ID3D11InputLayout* EngineDevice::InputLayout = nullptr;
+ID3D11Buffer* EngineDevice::VertexBuffer = nullptr;
+UINT EngineDevice::NumVerts;
+UINT EngineDevice::Stride;
+UINT EngineDevice::Offset;
 
 EngineDevice::EngineDevice()
 {
@@ -24,7 +32,27 @@ EngineDevice::~EngineDevice()
 
 void EngineDevice::Draw()
 {
+	FLOAT backgroundColor[4] = { 0.1f, 0.2f, 0.6f, 1.0f };
+	Context->ClearRenderTargetView(GetRTV(), backgroundColor);
 
+	RECT winRect;
+	GetClientRect(EngineWindow::GethWnd(), &winRect);
+	D3D11_VIEWPORT viewport = { 0.0f, 0.0f, (FLOAT)(winRect.right - winRect.left), (FLOAT)(winRect.bottom - winRect.top), 0.0f, 1.0f };
+	Context->RSSetViewports(1, &viewport);
+
+	Context->OMSetRenderTargets(1, &MainRTV, nullptr);
+
+	Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	Context->IASetInputLayout(InputLayout);
+
+	Context->VSSetShader(VertexShader, nullptr, 0);
+	Context->PSSetShader(PixelShader, nullptr, 0);
+
+	Context->IASetVertexBuffers(0, 1, &VertexBuffer, &Stride, &Offset);
+
+	Context->Draw(NumVerts, 0);
+
+	SwapChain->Present(1, 0);
 }
 
 IDXGIAdapter* EngineDevice::GetHighPerformanceAdapter()
@@ -109,7 +137,7 @@ void EngineDevice::CreateSwapChain()
 			DXGI_ADAPTER_DESC AdapterDesc;
 			DxgiAdapter->GetDesc(&AdapterDesc);
 
-			//내가 어떤 그래픽 디바이스(그래픽카드?)를 사용하는지 출력함
+			//내가 어떤 그래픽 디바이스(그래픽카드)를 사용하는지 출력함
 			OutputDebugStringA("Graphics Device: ");
 			OutputDebugStringW(AdapterDesc.Description);
 
@@ -158,6 +186,98 @@ void EngineDevice::CreateSwapChain()
 	}
 }
 
+void EngineDevice::CreateResorces()
+{
+	//Create Vertex Shader;
+	ID3DBlob* VsBlob;
+	{
+		ID3DBlob* ShaderCompileErrorsBlob;
+		HRESULT Result = D3DCompileFromFile(L"C:\\DevelopHSM\\FrameWork\\FrameWork\\EngineCore\\EngineShader.hlsl", nullptr, nullptr, "vs_main", "vs_5_0", 0, 0, &VsBlob, &ShaderCompileErrorsBlob);
+
+		if (FAILED(Result))
+		{
+			const char* errorString = NULL;
+			if (Result == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+			{
+				errorString = "Could not compile shader; file not found";
+			}
+			else if (ShaderCompileErrorsBlob) 
+			{
+				errorString = (const char*)ShaderCompileErrorsBlob->GetBufferPointer();
+				ShaderCompileErrorsBlob->Release();
+			}
+			MessageBoxA(0, errorString, "Shader Compiler Error", MB_ICONERROR | MB_OK);
+			return;
+		}
+
+		Result = Device->CreateVertexShader(VsBlob->GetBufferPointer(), VsBlob->GetBufferSize(), nullptr, &VertexShader);
+		assert(SUCCEEDED(Result));
+	}
+
+	// Create Pixel Shader
+	{
+		ID3DBlob* PsBlob;
+		ID3DBlob* ShaderCompileErrorsBlob;
+		HRESULT hResult = D3DCompileFromFile(L"C:\\DevelopHSM\\FrameWork\\FrameWork\\EngineCore\\EngineShader.hlsl", nullptr, nullptr, "ps_main", "ps_5_0", 0, 0, &PsBlob, &ShaderCompileErrorsBlob);
+		if (FAILED(hResult))
+		{
+			const char* errorString = NULL;
+			if (hResult == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+			{
+				errorString = "Could not compile shader; file not found";
+			}
+			else if (ShaderCompileErrorsBlob)
+			{
+				errorString = (const char*)ShaderCompileErrorsBlob->GetBufferPointer();
+				ShaderCompileErrorsBlob->Release();
+			}
+			MessageBoxA(0, errorString, "Shader Compiler Error", MB_ICONERROR | MB_OK);
+			return;
+		}
+
+		hResult = Device->CreatePixelShader(PsBlob->GetBufferPointer(), PsBlob->GetBufferSize(), nullptr, &PixelShader);
+		assert(SUCCEEDED(hResult));
+		PsBlob->Release();
+	}
+
+	// Create Input Layout
+	{
+		D3D11_INPUT_ELEMENT_DESC inputElementDesc[] =
+		{
+			{ "POS", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "COL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		};
+
+		HRESULT hResult = Device->CreateInputLayout(inputElementDesc, ARRAYSIZE(inputElementDesc), VsBlob->GetBufferPointer(), VsBlob->GetBufferSize(), &InputLayout);
+		assert(SUCCEEDED(hResult));
+		VsBlob->Release();
+	}
+
+	// Create Vertex Buffer
+
+	{
+		float VertexData[] = 
+		{ // x, y, r, g, b, a
+			0.0f,  0.5f, 0.f, 1.f, 0.f, 1.f,
+			0.5f, -0.5f, 1.f, 0.f, 0.f, 1.f,
+			-0.5f, -0.5f, 0.f, 0.f, 1.f, 1.f
+		};
+		Stride = 6 * sizeof(float);
+		NumVerts = sizeof(VertexData) / Stride;
+		Offset = 0;
+
+		D3D11_BUFFER_DESC VertexBufferDesc = {};
+		VertexBufferDesc.ByteWidth = sizeof(VertexData);
+		VertexBufferDesc.Usage = D3D11_USAGE_IMMUTABLE;
+		VertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+
+		D3D11_SUBRESOURCE_DATA VertexSubresourceData = { VertexData };
+
+		HRESULT hResult = Device->CreateBuffer(&VertexBufferDesc, &VertexSubresourceData, &VertexBuffer);
+		assert(SUCCEEDED(hResult));
+	}
+}
+
 void EngineDevice::CreateDepthStencil()
 {
 	float4 ScreenSize = EngineWindow::GetScreenSize();
@@ -185,9 +305,6 @@ void EngineDevice::CreateDepthStencil()
 		MsgAssert("뎁스스텐실뷰 생성에 실패했습니다.");
 		return;
 	}
-
-	int a = 0;
-
 }
 
 void EngineDevice::RenderStart()
@@ -288,7 +405,8 @@ void EngineDevice::Initialize()
 	}
 
 	CreateSwapChain();
-	CreateDepthStencil();
+	CreateResorces();
+	//CreateDepthStencil();
 }
 
 void EngineDevice::Release()

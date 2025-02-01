@@ -6,15 +6,13 @@
 #pragma comment(lib, "d3d11.lib")
 
 
-ID3D11Device* EngineDevice::Device = nullptr;
-ID3D11DeviceContext* EngineDevice::Context = nullptr;
-IDXGISwapChain* EngineDevice::SwapChain = nullptr;
+ID3D11Device1* EngineDevice::Device = nullptr;
+ID3D11DeviceContext1* EngineDevice::Context = nullptr;
+IDXGISwapChain1* EngineDevice::SwapChain = nullptr;
 ID3D11Texture2D* EngineDevice::BackBuffer = nullptr;
 ID3D11RenderTargetView* EngineDevice::MainRTV = nullptr;
 ID3D11Texture2D* EngineDevice::DepthStencileBuffer = nullptr;
 ID3D11DepthStencilView* EngineDevice::MainDSV = nullptr;
-
-
 
 EngineDevice::EngineDevice()
 {
@@ -86,80 +84,78 @@ IDXGIAdapter* EngineDevice::GetHighPerformanceAdapter()
 
 void EngineDevice::CreateSwapChain()
 {
-	float4 ScreenSize = EngineWindow::GetScreenSize();
-
-	DXGI_SWAP_CHAIN_DESC SwapChainDesc = { 0, };
-
-	// 기본정보
-	SwapChainDesc.BufferCount = 2;
-	SwapChainDesc.BufferDesc.Width = static_cast<UINT>(ScreenSize.ix());
-	SwapChainDesc.BufferDesc.Height = static_cast<UINT>(ScreenSize.iy());
-	SwapChainDesc.OutputWindow = EngineWindow::GethWnd();
-
-	// 화면 갱신률
-	SwapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-	SwapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
-
-	// 그래픽이미지 포맷
-	SwapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	SwapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	SwapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-
-	SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT | DXGI_USAGE_SHADER_INPUT;
-
-	// 안티얼라이언싱 퀄리티 1짜리롤 
-	SwapChainDesc.SampleDesc.Quality = 0;
-	SwapChainDesc.SampleDesc.Count = 1;
-	SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	SwapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-
-	// false면 전체화면
-	SwapChainDesc.Windowed = true;
-
-	IDXGIDevice* SwapDevice = nullptr;
-	IDXGIAdapter* SwapAdapter = nullptr;
-	IDXGIFactory* SwapFactory = nullptr;
-
-	Device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(&SwapDevice));
-	if (nullptr == SwapDevice)
+	//SwapChain 개체 세팅 Process
 	{
-		MsgAssert("DXGI 디바이스를 DirectX디바이스에서 얻어오지 못했습니다.");
-		return;
+		//Dxgi팩토리 개체 생성
+		IDXGIFactory2* DxgiFactory;
+		{
+			//팩토리를 가지고 오기 위한 과정
+			//1. Device로 부터dxgiDevice를 가지고옴
+			//2. dxgiDevice로 부터 dxgiAdapter를 가지고옴
+			//3. DxgiAdapter로 부터 Factory를 가지고 옴
+
+			//DxgiDevice 개체를 Device로 부터 받아옴.
+			IDXGIDevice1* DxgiDevice;
+			HRESULT Result = Device->QueryInterface(__uuidof(IDXGIDevice1), (void**)&DxgiDevice);
+			assert(SUCCEEDED(Result));
+
+			//DxgiDevice를 통해 DxgiAdapter를 받아옴
+			IDXGIAdapter* DxgiAdapter;
+			Result = DxgiDevice->GetAdapter(&DxgiAdapter);
+			assert(SUCCEEDED(Result));
+			DxgiDevice->Release();
+
+			//DxgiAdapter를 통해 AdapterDesc를 받아옴
+			DXGI_ADAPTER_DESC AdapterDesc;
+			DxgiAdapter->GetDesc(&AdapterDesc);
+
+			//내가 어떤 그래픽 디바이스(그래픽카드?)를 사용하는지 출력함
+			OutputDebugStringA("Graphics Device: ");
+			OutputDebugStringW(AdapterDesc.Description);
+
+			//해당 어댑터의 팩토리를 가지고옴(부모)
+			Result = DxgiAdapter->GetParent(__uuidof(IDXGIFactory2), (void**)&DxgiFactory);
+			assert(SUCCEEDED(Result));
+
+			//어댑터 릴리즈
+			DxgiAdapter->Release();
+		}
+
+		//Swapchain을 위한 Desc를 설정하고
+		DXGI_SWAP_CHAIN_DESC1 SwapChainDesc = { 0, };
+
+		SwapChainDesc.Width = 0;
+		SwapChainDesc.Height = 0;
+		SwapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM_SRGB;
+		SwapChainDesc.SampleDesc.Count = 1;
+		SwapChainDesc.SampleDesc.Quality = 0;
+		SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		SwapChainDesc.BufferCount = 2;
+		SwapChainDesc.Scaling = DXGI_SCALING_STRETCH;
+		SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+		SwapChainDesc.AlphaMode = DXGI_ALPHA_MODE_UNSPECIFIED;
+		SwapChainDesc.Flags = 0;
+
+		//Factory를 통해, Swapchain을 생성
+		HRESULT Result = DxgiFactory->CreateSwapChainForHwnd(Device, EngineWindow::GethWnd(), &SwapChainDesc, 0, 0, &SwapChain);
+		assert(SUCCEEDED(Result));
+
+		//Swapchain을 만드는데 성공하면 Factory를 Release;
+		DxgiFactory->Release();
 	}
-
-	SwapDevice->GetParent(__uuidof(IDXGIAdapter), reinterpret_cast<void**>(&SwapAdapter));
-	if (nullptr == SwapAdapter)
-	{
-		MsgAssert("DXGI 디바이스를 DirectX디바이스에서 얻어오지 못했습니다.");
-		return;
-	}
-
-	SwapAdapter->GetParent(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&SwapFactory));
-
-	if (S_OK != SwapFactory->CreateSwapChain(Device, &SwapChainDesc, &SwapChain))
-	{
-		MsgAssert("스왑체인 생성에 실패했습니다.");
-		return;
-	}
-
-	SwapDevice->Release();
-	SwapAdapter->Release();
-	SwapFactory->Release();
-
-	// 랜더타겟은 DC의 라고 보시면 됩니다.
-
-
-	HRESULT Result = SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&BackBuffer));
-	if (S_OK != Result)
-	{
-		MsgAssert("스왑체인 생성에 실패했습니다.");
-		return;
-	}
-
-	Device->CreateRenderTargetView(BackBuffer, nullptr, &MainRTV);
 	
-	BackBuffer->Release();
-	BackBuffer = nullptr;
+	//Swapchain에 FrameBuffer 세팅
+	{
+		//FrameBuffer 받아오기
+		HRESULT Result = SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&BackBuffer);
+		assert(SUCCEEDED(Result));
+
+		Result = Device->CreateRenderTargetView(BackBuffer, nullptr, &MainRTV);
+		assert(SUCCEEDED(Result));
+		
+		BackBuffer->Release();
+		BackBuffer = nullptr;
+	}
 }
 
 void EngineDevice::CreateDepthStencil()
@@ -240,6 +236,9 @@ void EngineDevice::Initialize()
 		return;
 	}
 
+	ID3D11Device* BaseDevice;
+	ID3D11DeviceContext* BaseContext;
+
 	HRESULT Result = D3D11CreateDevice(
 		Adapter,
 		D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_UNKNOWN,
@@ -248,9 +247,9 @@ void EngineDevice::Initialize()
 		nullptr,
 		0,
 		D3D11_SDK_VERSION,
-		&Device,
+		&BaseDevice,
 		&Level,
-		&Context
+		&BaseContext
 	);
 
 	if (S_OK != Result)
@@ -258,6 +257,14 @@ void EngineDevice::Initialize()
 		//MsgAssert("디바이스 생성에 실패했습니다.");
 		return;
 	}
+
+	Result = BaseDevice->QueryInterface(__uuidof(ID3D11Device1), (void**)&Device);
+	assert(SUCCEEDED(Result));
+	BaseDevice->Release();
+
+	Result = BaseContext->QueryInterface(__uuidof(ID3D11DeviceContext1), (void**)&Context);
+	assert(SUCCEEDED(Result));
+	BaseContext->Release();
 
 	if (nullptr != Adapter)
 	{
@@ -273,6 +280,12 @@ void EngineDevice::Initialize()
 
 	// 멀티쓰레드 사용하겠다는 설정을 해놨다.
 	Result = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+
+	if (S_OK != Result)
+	{
+		//MsgAssert("디바이스 생성에 실패했습니다.");
+		return;
+	}
 
 	CreateSwapChain();
 	CreateDepthStencil();

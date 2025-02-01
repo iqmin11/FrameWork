@@ -1,5 +1,5 @@
 #pragma once
-#include <d3d11.h>
+#include <d3d11_1.h>
 
 // Ό³Έν :
 class EngineDevice
@@ -54,9 +54,9 @@ protected:
 
 private:
 
-	static ID3D11Device* Device;
-	static ID3D11DeviceContext* Context;
-	static IDXGISwapChain* SwapChain;
+	static ID3D11Device1* Device;
+	static ID3D11DeviceContext1* Context;
+	static IDXGISwapChain1* SwapChain;
 	static IDXGIAdapter* GetHighPerformanceAdapter();
 	
 	static ID3D11Texture2D* BackBuffer;

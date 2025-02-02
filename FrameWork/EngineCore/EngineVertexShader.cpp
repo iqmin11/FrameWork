@@ -10,9 +10,20 @@ EngineVertexShader::EngineVertexShader()
 
 EngineVertexShader::~EngineVertexShader() 
 {
+	if (VsBlob != nullptr)
+	{
+		VsBlob->Release();
+		VsBlob = nullptr;
+	}
+
+	if (VertexShader != nullptr)
+	{
+		VertexShader->Release();
+		VertexShader = nullptr;
+	}
 }
 
-void EngineVertexShader::Load(EngineFile ShaderFile, std::string_view ShaderName)
+std::shared_ptr<EngineVertexShader> EngineVertexShader::Load(EngineFile ShaderFile, std::string_view ShaderName)
 {
 	std::shared_ptr<EngineVertexShader> NewVs = Create(ShaderName);
 
@@ -39,11 +50,12 @@ void EngineVertexShader::Load(EngineFile ShaderFile, std::string_view ShaderName
 			ShaderCompileErrorsBlob->Release();
 		}
 		MessageBoxA(0, errorString, "Shader Compiler Error", MB_ICONERROR | MB_OK);
-		return;
+		return nullptr;
 	}
 
 	Result = EngineDevice::GetDevice()->CreateVertexShader(NewVs->VsBlob->GetBufferPointer(), NewVs->VsBlob->GetBufferSize(), nullptr, &(NewVs->VertexShader));
 	assert(SUCCEEDED(Result));
 
+	return NewVs;
 }
 

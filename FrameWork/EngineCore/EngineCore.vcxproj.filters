@@ -56,6 +56,9 @@
     <ClInclude Include="EngineVertexShader.h">
       <Filter>Resorces</Filter>
     </ClInclude>
+    <ClInclude Include="EngineShader.h">
+      <Filter>Resorces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -108,6 +111,9 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="EngineVertexShader.cpp">
+      <Filter>Resorces</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineShader.cpp">
       <Filter>Resorces</Filter>
     </ClCompile>
   </ItemGroup>

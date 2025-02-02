@@ -48,7 +48,7 @@ void EngineDevice::Draw()
 	Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	Context->IASetInputLayout(InputLayout);
 
-	Context->VSSetShader(VertexShader, nullptr, 0);
+	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVs(), nullptr, 0);
 	Context->PSSetShader(PixelShader, nullptr, 0);
 
 	Context->IASetVertexBuffers(0, 1, &VertexBuffer, &Stride, &Offset);
@@ -198,7 +198,9 @@ void EngineDevice::CreateResorces()
 	EngineFile ShaderFile = ShaderDir.GetPlusFileName("BaseShader.hlsl");
 
 	//Create Vertex Shader;
-	ID3DBlob* VsBlob;
+
+	std::shared_ptr<EngineVertexShader> Vs = EngineVertexShader::Load(ShaderFile, "vs_main");
+	/*ID3DBlob* VsBlob;
 	{
 		ID3DBlob* ShaderCompileErrorsBlob;
 		HRESULT Result = D3DCompileFromFile(ShaderFile.GetFullPathToWstring().c_str(), nullptr, nullptr, "vs_main", "vs_5_0", 0, 0, &VsBlob, &ShaderCompileErrorsBlob);
@@ -221,7 +223,7 @@ void EngineDevice::CreateResorces()
 
 		Result = Device->CreateVertexShader(VsBlob->GetBufferPointer(), VsBlob->GetBufferSize(), nullptr, &VertexShader);
 		assert(SUCCEEDED(Result));
-	}
+	}*/
 
 	// Create Pixel Shader
 	{
@@ -257,9 +259,9 @@ void EngineDevice::CreateResorces()
 			{ "COL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 		};
 
-		HRESULT hResult = Device->CreateInputLayout(inputElementDesc, ARRAYSIZE(inputElementDesc), VsBlob->GetBufferPointer(), VsBlob->GetBufferSize(), &InputLayout);
+		HRESULT hResult = Device->CreateInputLayout(inputElementDesc, ARRAYSIZE(inputElementDesc), Vs->GetBlob()->GetBufferPointer(), Vs->GetBlob()->GetBufferSize(), &InputLayout);
 		assert(SUCCEEDED(hResult));
-		VsBlob->Release();
+		//Vs->GetBlob()->Release();
 	}
 
 	// Create Vertex Buffer
@@ -420,11 +422,7 @@ void EngineDevice::Initialize()
 void EngineDevice::Release()
 {
 	//TestTriAngleResorece
-	if (nullptr != VertexShader)
-	{
-		VertexShader->Release();
-		VertexShader = nullptr;
-	}
+	EngineVertexShader::ResorcesClear();
 
 	if (nullptr != PixelShader)
 	{

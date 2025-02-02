@@ -34,6 +34,18 @@ EnginePath::EnginePath(EnginePath&& _Other) noexcept
 
 }
 
+EnginePath& EnginePath::operator=(const EnginePath& _Other)
+{
+	Path = _Other.Path;
+	return *this;
+}
+
+EnginePath& EnginePath::operator=(EnginePath&& _Other) noexcept
+{
+	Path = std::move(_Other.Path);
+	return *this;
+}
+
 std::string EnginePath::GetFileName(std::string_view _Path)
 {
 	std::filesystem::path NewPath = _Path;

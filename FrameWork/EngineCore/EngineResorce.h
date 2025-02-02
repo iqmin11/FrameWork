@@ -23,19 +23,25 @@ public:
 		Path = ResorcePath;
 	}
 
-protected:
 	static std::shared_ptr<ResorceType> Find(std::string_view ResorceName)
 	{
 		std::string UpperName = EngineString::ToUpper(ResorceName);
 		auto FindIter = ResorcesContainer.find(UpperName);
-		
-		if (FindIter == ResorcesContainer.end())
+
+		if (FindIter != ResorcesContainer.end())
 		{
 			return FindIter->second;
 		}
 
 		return nullptr;
 	}
+
+	static void ResorcesClear()
+	{
+		ResorcesContainer.clear();
+	}
+
+protected:
 
 	static std::shared_ptr<ResorceType> Create(std::string_view ResorceName)
 	{
@@ -61,5 +67,5 @@ private:
 };
 
 template <typename ResorceType>
-std::unordered_map<std::string, std::shared_ptr<ResorceType>> ResorcesContainer;
+std::unordered_map<std::string, std::shared_ptr<ResorceType>> EngineResorce<ResorceType>::ResorcesContainer;
 

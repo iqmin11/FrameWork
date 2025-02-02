@@ -1,11 +1,14 @@
 #include "PrecompileHeader.h"
 #include "EngineDevice.h"
-#include <EnginePlatform/EngineWindow.h>
-#include <d3dcompiler.h>
 
-#pragma comment(lib, "dxgi.lib")
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3dcompiler.lib")
+#include "EngineBase/EngineDirectory.h"
+#include "EngineBase/EngineFile.h"
+
+#include "EnginePlatform/EngineWindow.h"
+
+#include "EngineResorce.h"
+#include "EngineVertexShader.h"
+
 
 ID3D11Device1* EngineDevice::Device = nullptr;
 ID3D11DeviceContext1* EngineDevice::Context = nullptr;
@@ -188,11 +191,17 @@ void EngineDevice::CreateSwapChain()
 
 void EngineDevice::CreateResorces()
 {
+	//Find Shader File Path
+	EngineDirectory ShaderDir;
+	ShaderDir.MoveParentToChildPath("EngineCoreShader");
+	ShaderDir.TryMove("EngineCoreShader");
+	EngineFile ShaderFile = ShaderDir.GetPlusFileName("BaseShader.hlsl");
+
 	//Create Vertex Shader;
 	ID3DBlob* VsBlob;
 	{
 		ID3DBlob* ShaderCompileErrorsBlob;
-		HRESULT Result = D3DCompileFromFile(L"C:\\DevelopHSM\\FrameWork\\FrameWork\\EngineCore\\EngineShader.hlsl", nullptr, nullptr, "vs_main", "vs_5_0", 0, 0, &VsBlob, &ShaderCompileErrorsBlob);
+		HRESULT Result = D3DCompileFromFile(ShaderFile.GetFullPathToWstring().c_str(), nullptr, nullptr, "vs_main", "vs_5_0", 0, 0, &VsBlob, &ShaderCompileErrorsBlob);
 
 		if (FAILED(Result))
 		{
@@ -218,7 +227,7 @@ void EngineDevice::CreateResorces()
 	{
 		ID3DBlob* PsBlob;
 		ID3DBlob* ShaderCompileErrorsBlob;
-		HRESULT hResult = D3DCompileFromFile(L"C:\\DevelopHSM\\FrameWork\\FrameWork\\EngineCore\\EngineShader.hlsl", nullptr, nullptr, "ps_main", "ps_5_0", 0, 0, &PsBlob, &ShaderCompileErrorsBlob);
+		HRESULT hResult = D3DCompileFromFile(ShaderFile.GetFullPathToWstring().c_str(), nullptr, nullptr, "ps_main", "ps_5_0", 0, 0, &PsBlob, &ShaderCompileErrorsBlob);
 		if (FAILED(hResult))
 		{
 			const char* errorString = NULL;
@@ -254,7 +263,6 @@ void EngineDevice::CreateResorces()
 	}
 
 	// Create Vertex Buffer
-
 	{
 		float VertexData[] = 
 		{ // x, y, r, g, b, a

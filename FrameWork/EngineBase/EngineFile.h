@@ -20,9 +20,14 @@ public:
 	//EngineFile& operator=(const EngineFile& _Other) = delete;
 	//EngineFile& operator=(EngineFile&& _Other) noexcept = delete;
 
-	std::string GetFullPath()
+	std::string GetFullPathToString()
 	{
 		return Path.string();
+	}
+
+	std::wstring GetFullPathToWstring()
+	{
+		return Path.wstring();
 	}
 
 	EngineDirectory GetDirectory();

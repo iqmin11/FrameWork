@@ -47,6 +47,15 @@
     <ClInclude Include="imgui\imgui_impl_win32.h">
       <Filter>GUI\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="EngineResorce.h">
+      <Filter>Resorces</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineNameTag.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineVertexShader.h">
+      <Filter>Resorces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -92,6 +101,15 @@
     <ClCompile Include="imgui\imgui_impl_win32.cpp">
       <Filter>GUI\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="EngineResorce.cpp">
+      <Filter>Resorces</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineNameTag.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineVertexShader.cpp">
+      <Filter>Resorces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -118,13 +136,8 @@
     <Filter Include="GUI\imgui">
       <UniqueIdentifier>{2004e405-f211-401b-955f-8267ed3d6a06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shader">
-      <UniqueIdentifier>{d3c5ed7c-cfd3-4fa0-ab5a-025fbb7abe43}</UniqueIdentifier>
+    <Filter Include="Resorces">
+      <UniqueIdentifier>{61591fe9-939b-4669-b3c3-90a8d2da3907}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="EngineShader.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
   </ItemGroup>
 </Project>

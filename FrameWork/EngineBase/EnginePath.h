@@ -13,8 +13,8 @@ public:
 	// delete Function
 	EnginePath(const EnginePath& _Other);
 	EnginePath(EnginePath&& _Other) noexcept;
-	EnginePath& operator=(const EnginePath& _Other) = delete;
-	EnginePath& operator=(EnginePath&& _Other) noexcept = delete;
+	EnginePath& operator=(const EnginePath& _Other);
+	EnginePath& operator=(EnginePath&& _Other) noexcept;
 
 	static std::string GetFileName(std::string_view _Path);
 	static std::string GetFolderPath(std::string_view _Path);

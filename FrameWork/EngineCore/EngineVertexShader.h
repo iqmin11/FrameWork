@@ -1,9 +1,9 @@
 #pragma once
 #include "EngineResorce.h"
-#include "EngineShader.h"
+#include "IEngineShader.h"
 
 // Ό³Έν :
-class EngineVertexShader : public EngineResorce<EngineVertexShader>, public EngineShader
+class EngineVertexShader : public EngineResorce<EngineVertexShader>, public IEngineShader
 {
 public:
 	// constrcuter destructer
@@ -18,11 +18,6 @@ public:
 
 	static std::shared_ptr<EngineVertexShader> Load(class EngineFile ShaderFile, std::string_view ShaderName);
 
-	ID3DBlob* GetBlob()
-	{
-		return VsBlob;
-	}
-
 	ID3D11VertexShader* GetVs()
 	{
 		return VertexShader;
@@ -31,7 +26,6 @@ public:
 protected:
 
 private:
-	ID3DBlob* VsBlob = nullptr;
 	ID3D11VertexShader* VertexShader = nullptr;
 };
 

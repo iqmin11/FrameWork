@@ -203,7 +203,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EngineShader.h">
+    <ClInclude Include="IEngineShader.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -261,7 +261,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EngineShader.cpp">
+    <ClCompile Include="IEngineShader.cpp">
       <SubType>
       </SubType>
     </ClCompile>

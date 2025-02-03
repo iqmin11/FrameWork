@@ -10,10 +10,10 @@ EngineVertexShader::EngineVertexShader()
 
 EngineVertexShader::~EngineVertexShader() 
 {
-	if (VsBlob != nullptr)
+	if (ShaderBlob != nullptr)
 	{
-		VsBlob->Release();
-		VsBlob = nullptr;
+		ShaderBlob->Release();
+		ShaderBlob = nullptr;
 	}
 
 	if (VertexShader != nullptr)
@@ -35,7 +35,7 @@ std::shared_ptr<EngineVertexShader> EngineVertexShader::Load(EngineFile ShaderFi
 	NewVs->SetPath(ShaderFile);
 
 	ID3DBlob* ShaderCompileErrorsBlob;
-	HRESULT Result = D3DCompileFromFile(ShaderFile.GetFullPathToWstring().c_str(), nullptr, nullptr, "vs_main", "vs_5_0", 0, 0, &(NewVs->VsBlob), &ShaderCompileErrorsBlob);
+	HRESULT Result = D3DCompileFromFile(ShaderFile.GetFullPathToWstring().c_str(), nullptr, nullptr, "vs_main", "vs_5_0", 0, 0, &(NewVs->ShaderBlob), &ShaderCompileErrorsBlob);
 
 	if (FAILED(Result))
 	{
@@ -53,7 +53,7 @@ std::shared_ptr<EngineVertexShader> EngineVertexShader::Load(EngineFile ShaderFi
 		return nullptr;
 	}
 
-	Result = EngineDevice::GetDevice()->CreateVertexShader(NewVs->VsBlob->GetBufferPointer(), NewVs->VsBlob->GetBufferSize(), nullptr, &(NewVs->VertexShader));
+	Result = EngineDevice::GetDevice()->CreateVertexShader(NewVs->ShaderBlob->GetBufferPointer(), NewVs->ShaderBlob->GetBufferSize(), nullptr, &(NewVs->VertexShader));
 	assert(SUCCEEDED(Result));
 
 	return NewVs;

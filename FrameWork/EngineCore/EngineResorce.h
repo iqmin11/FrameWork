@@ -23,6 +23,11 @@ public:
 		Path = ResorcePath;
 	}
 
+	const EnginePath& GetPath()
+	{
+		return Path;
+	}
+
 	static std::shared_ptr<ResorceType> Find(std::string_view ResorceName)
 	{
 		std::string UpperName = EngineString::ToUpper(ResorceName);

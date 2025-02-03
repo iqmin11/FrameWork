@@ -53,11 +53,14 @@
     <ClInclude Include="EngineNameTag.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="EngineVertexShader.h">
-      <Filter>Resorces</Filter>
-    </ClInclude>
     <ClInclude Include="IEngineShader.h">
-      <Filter>Resorces</Filter>
+      <Filter>Resorces\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineVertexShader.h">
+      <Filter>Resorces\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePixelShader.h">
+      <Filter>Resorces\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,11 +113,14 @@
     <ClCompile Include="EngineNameTag.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="EngineVertexShader.cpp">
-      <Filter>Resorces</Filter>
-    </ClCompile>
     <ClCompile Include="IEngineShader.cpp">
-      <Filter>Resorces</Filter>
+      <Filter>Resorces\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineVertexShader.cpp">
+      <Filter>Resorces\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePixelShader.cpp">
+      <Filter>Resorces\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +150,9 @@
     </Filter>
     <Filter Include="Resorces">
       <UniqueIdentifier>{61591fe9-939b-4669-b3c3-90a8d2da3907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resorces\Shader">
+      <UniqueIdentifier>{6d96e00d-d4d0-44a8-9a62-45bebad261f7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

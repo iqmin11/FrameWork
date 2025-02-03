@@ -8,6 +8,7 @@
 
 #include "EngineResorce.h"
 #include "EngineVertexShader.h"
+#include "EnginePixelShader.h"
 
 
 ID3D11Device1* EngineDevice::Device = nullptr;
@@ -49,7 +50,7 @@ void EngineDevice::Draw()
 	Context->IASetInputLayout(InputLayout);
 
 	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVs(), nullptr, 0);
-	Context->PSSetShader(PixelShader, nullptr, 0);
+	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPs(), nullptr, 0);
 
 	Context->IASetVertexBuffers(0, 1, &VertexBuffer, &Stride, &Offset);
 
@@ -198,58 +199,10 @@ void EngineDevice::CreateResorces()
 	EngineFile ShaderFile = ShaderDir.GetPlusFileName("BaseShader.hlsl");
 
 	//Create Vertex Shader;
-
 	std::shared_ptr<EngineVertexShader> Vs = EngineVertexShader::Load(ShaderFile, "vs_main");
-	/*ID3DBlob* VsBlob;
-	{
-		ID3DBlob* ShaderCompileErrorsBlob;
-		HRESULT Result = D3DCompileFromFile(ShaderFile.GetFullPathToWstring().c_str(), nullptr, nullptr, "vs_main", "vs_5_0", 0, 0, &VsBlob, &ShaderCompileErrorsBlob);
-
-		if (FAILED(Result))
-		{
-			const char* errorString = NULL;
-			if (Result == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
-			{
-				errorString = "Could not compile shader; file not found";
-			}
-			else if (ShaderCompileErrorsBlob) 
-			{
-				errorString = (const char*)ShaderCompileErrorsBlob->GetBufferPointer();
-				ShaderCompileErrorsBlob->Release();
-			}
-			MessageBoxA(0, errorString, "Shader Compiler Error", MB_ICONERROR | MB_OK);
-			return;
-		}
-
-		Result = Device->CreateVertexShader(VsBlob->GetBufferPointer(), VsBlob->GetBufferSize(), nullptr, &VertexShader);
-		assert(SUCCEEDED(Result));
-	}*/
 
 	// Create Pixel Shader
-	{
-		ID3DBlob* PsBlob;
-		ID3DBlob* ShaderCompileErrorsBlob;
-		HRESULT hResult = D3DCompileFromFile(ShaderFile.GetFullPathToWstring().c_str(), nullptr, nullptr, "ps_main", "ps_5_0", 0, 0, &PsBlob, &ShaderCompileErrorsBlob);
-		if (FAILED(hResult))
-		{
-			const char* errorString = NULL;
-			if (hResult == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
-			{
-				errorString = "Could not compile shader; file not found";
-			}
-			else if (ShaderCompileErrorsBlob)
-			{
-				errorString = (const char*)ShaderCompileErrorsBlob->GetBufferPointer();
-				ShaderCompileErrorsBlob->Release();
-			}
-			MessageBoxA(0, errorString, "Shader Compiler Error", MB_ICONERROR | MB_OK);
-			return;
-		}
-
-		hResult = Device->CreatePixelShader(PsBlob->GetBufferPointer(), PsBlob->GetBufferSize(), nullptr, &PixelShader);
-		assert(SUCCEEDED(hResult));
-		PsBlob->Release();
-	}
+	std::shared_ptr<EnginePixelShader> Ps = EnginePixelShader::Load(ShaderFile, "ps_main");
 
 	// Create Input Layout
 	{
@@ -261,7 +214,6 @@ void EngineDevice::CreateResorces()
 
 		HRESULT hResult = Device->CreateInputLayout(inputElementDesc, ARRAYSIZE(inputElementDesc), Vs->GetBlob()->GetBufferPointer(), Vs->GetBlob()->GetBufferSize(), &InputLayout);
 		assert(SUCCEEDED(hResult));
-		//Vs->GetBlob()->Release();
 	}
 
 	// Create Vertex Buffer
@@ -423,12 +375,13 @@ void EngineDevice::Release()
 {
 	//TestTriAngleResorece
 	EngineVertexShader::ResorcesClear();
+	EnginePixelShader::ResorcesClear();
 
-	if (nullptr != PixelShader)
-	{
-		PixelShader->Release();
-		PixelShader = nullptr;
-	}
+	//if (nullptr != PixelShader)
+	//{
+	//	PixelShader->Release();
+	//	PixelShader = nullptr;
+	//}
 
 	if (nullptr != InputLayout)
 	{

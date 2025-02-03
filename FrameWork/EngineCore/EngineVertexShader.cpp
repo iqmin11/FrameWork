@@ -33,27 +33,9 @@ std::shared_ptr<EngineVertexShader> EngineVertexShader::Load(EngineFile ShaderFi
 	}
 
 	NewVs->SetPath(ShaderFile);
+	NewVs->ShaderCompile(ShaderFile, "vs_main", "vs_5_0");
 
-	ID3DBlob* ShaderCompileErrorsBlob;
-	HRESULT Result = D3DCompileFromFile(ShaderFile.GetFullPathToWstring().c_str(), nullptr, nullptr, "vs_main", "vs_5_0", 0, 0, &(NewVs->ShaderBlob), &ShaderCompileErrorsBlob);
-
-	if (FAILED(Result))
-	{
-		const char* errorString = NULL;
-		if (Result == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
-		{
-			errorString = "Could not compile shader; file not found";
-		}
-		else if (ShaderCompileErrorsBlob)
-		{
-			errorString = (const char*)ShaderCompileErrorsBlob->GetBufferPointer();
-			ShaderCompileErrorsBlob->Release();
-		}
-		MessageBoxA(0, errorString, "Shader Compiler Error", MB_ICONERROR | MB_OK);
-		return nullptr;
-	}
-
-	Result = EngineDevice::GetDevice()->CreateVertexShader(NewVs->ShaderBlob->GetBufferPointer(), NewVs->ShaderBlob->GetBufferSize(), nullptr, &(NewVs->VertexShader));
+	HRESULT Result = EngineDevice::GetDevice()->CreateVertexShader(NewVs->ShaderBlob->GetBufferPointer(), NewVs->ShaderBlob->GetBufferSize(), nullptr, &(NewVs->VertexShader));
 	assert(SUCCEEDED(Result));
 
 	return NewVs;

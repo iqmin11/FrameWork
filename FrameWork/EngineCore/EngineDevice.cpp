@@ -49,14 +49,9 @@ void EngineDevice::Draw()
 	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPs(), nullptr, 0);
 
 	std::shared_ptr<EngineVertexBuffer> EngineVb = EngineVertexBuffer::Find("Triangle");
-
-	ID3D11Buffer* tempVb = EngineVb->GetVb();
-	UINT tempStride = EngineVb->GetStride();
-	UINT tempNumVerts = EngineVb->GetNumVerts();
-	UINT tempOffset = EngineVb->GetOffset();
-	Context->IASetVertexBuffers(0, 1, &tempVb, &tempStride, &tempOffset);
-
-	Context->Draw(tempNumVerts, 0);
+	
+	EngineVb->Setting();
+	Context->Draw(EngineVb->GetNumVerts(), 0);
 
 	SwapChain->Present(1, 0);
 }

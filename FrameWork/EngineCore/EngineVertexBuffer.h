@@ -60,6 +60,8 @@ public:
 		return Offset;
 	}
 
+	void Setting() override;
+
 protected:
 
 private:

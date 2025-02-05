@@ -48,6 +48,8 @@ public:
 		ResorcesContainer.clear();
 	}
 
+	virtual void Setting() {}; //DrawCall 전 Context Setting을 의미
+
 protected:
 
 	static std::shared_ptr<ResorceType> Create(std::string_view ResorceName)

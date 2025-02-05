@@ -8,6 +8,7 @@
 
 #include "EngineResorce.h"
 #include "EngineVertex.h"
+#include "EngineVertexBuffer.h"
 #include "EngineVertexShader.h"
 #include "EnginePixelShader.h"
 #include "EngineInputLayout.h"
@@ -20,11 +21,6 @@ ID3D11Texture2D* EngineDevice::BackBuffer = nullptr;
 ID3D11RenderTargetView* EngineDevice::MainRTV = nullptr;
 ID3D11Texture2D* EngineDevice::DepthStencileBuffer = nullptr;
 ID3D11DepthStencilView* EngineDevice::MainDSV = nullptr;
-
-ID3D11Buffer* EngineDevice::VertexBuffer = nullptr;
-UINT EngineDevice::NumVerts;
-UINT EngineDevice::Stride;
-UINT EngineDevice::Offset;
 
 EngineDevice::EngineDevice()
 {
@@ -52,9 +48,15 @@ void EngineDevice::Draw()
 	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVs(), nullptr, 0);
 	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPs(), nullptr, 0);
 
-	Context->IASetVertexBuffers(0, 1, &VertexBuffer, &Stride, &Offset);
+	std::shared_ptr<EngineVertexBuffer> EngineVb = EngineVertexBuffer::Find("Triangle");
 
-	Context->Draw(NumVerts, 0);
+	ID3D11Buffer* tempVb = EngineVb->GetVb();
+	UINT tempStride = EngineVb->GetStride();
+	UINT tempNumVerts = EngineVb->GetNumVerts();
+	UINT tempOffset = EngineVb->GetOffset();
+	Context->IASetVertexBuffers(0, 1, &tempVb, &tempStride, &tempOffset);
+
+	Context->Draw(tempNumVerts, 0);
 
 	SwapChain->Present(1, 0);
 }
@@ -207,30 +209,17 @@ void EngineDevice::CreateResorces()
 	// Create Input Layout
 	EngineInputLayout::Load("Pos4_Col4", EngineVertex::LayOutDesc, ARRAYSIZE(EngineVertex::LayOutDesc), Vs);
 
+	// Create Vertex Data
+	std::vector<EngineVertex> VertexData(3);
+	VertexData[0].POSITION = { 0.0f,  0.5f, 0.0f, 1.0f };
+	VertexData[0].COLOR = { 0.f, 1.f, 0.f, 1.f };
+	VertexData[1].POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
+	VertexData[1].COLOR = { 1.f, 0.f, 0.f, 1.f };
+	VertexData[2].POSITION = { -0.5f, -0.5f, 0.0f, 1.0f };
+	VertexData[2].COLOR = { 0.f, 0.f, 1.f, 1.f };
+	
 	// Create Vertex Buffer
-	{
-		EngineVertex VertexData[3];
-		VertexData[0].POSITION = { 0.0f,  0.5f, 0.0f, 1.0f };
-		VertexData[0].COLOR = { 0.f, 1.f, 0.f, 1.f };
-		VertexData[1].POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
-		VertexData[1].COLOR = { 1.f, 0.f, 0.f, 1.f };
-		VertexData[2].POSITION = { -0.5f, -0.5f, 0.0f, 1.0f };
-		VertexData[2].COLOR = { 0.f, 0.f, 1.f, 1.f };
-
-		Stride = sizeof(EngineVertex);
-		NumVerts = sizeof(VertexData) / Stride;
-		Offset = 0;
-
-		D3D11_BUFFER_DESC VertexBufferDesc = {};
-		VertexBufferDesc.ByteWidth = sizeof(VertexData);
-		VertexBufferDesc.Usage = D3D11_USAGE_IMMUTABLE;
-		VertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-
-		D3D11_SUBRESOURCE_DATA VertexSubresourceData = { VertexData };
-
-		HRESULT hResult = Device->CreateBuffer(&VertexBufferDesc, &VertexSubresourceData, &VertexBuffer);
-		assert(SUCCEEDED(hResult));
-	}
+	EngineVertexBuffer::Load("Triangle", VertexData);
 }
 
 void EngineDevice::CreateDepthStencil()
@@ -370,18 +359,7 @@ void EngineDevice::Release()
 	EngineVertexShader::ResorcesClear();
 	EnginePixelShader::ResorcesClear();
 	EngineInputLayout::ResorcesClear();
-
-	/*if (nullptr != InputLayout)
-	{
-		InputLayout->Release();
-		InputLayout = nullptr;
-	}*/
-
-	if (nullptr != VertexBuffer)
-	{
-		VertexBuffer->Release();
-		VertexBuffer = nullptr;
-	}
+	EngineVertexBuffer::ResorcesClear();
 
 	//RealLogic
 	if (nullptr != BackBuffer)

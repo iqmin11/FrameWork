@@ -68,6 +68,12 @@
     <ClInclude Include="EngineVertex.h">
       <Filter>Resorces\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="EngineVertexBuffer.h">
+      <Filter>Resorces\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDirectBuffer.h">
+      <Filter>Resorces\Buffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -133,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="EngineVertex.cpp">
       <Filter>Resorces\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineVertexBuffer.cpp">
+      <Filter>Resorces\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDirectBuffer.cpp">
+      <Filter>Resorces\Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

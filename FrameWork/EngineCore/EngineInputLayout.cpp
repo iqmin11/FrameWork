@@ -16,7 +16,7 @@ EngineInputLayout::~EngineInputLayout()
 	}
 }
 
-void EngineInputLayout::Load(std::string_view ILName, D3D11_INPUT_ELEMENT_DESC* ILDesc, UINT ILDescArrSize, std::shared_ptr<EngineVertexShader> Vs)
+std::shared_ptr<EngineInputLayout> EngineInputLayout::Load(std::string_view ILName, D3D11_INPUT_ELEMENT_DESC* ILDesc, UINT ILDescArrSize, std::shared_ptr<EngineVertexShader> Vs)
 {
 	if(Vs == nullptr)
 	{
@@ -27,5 +27,7 @@ void EngineInputLayout::Load(std::string_view ILName, D3D11_INPUT_ELEMENT_DESC* 
 
 	HRESULT Result = EngineDevice::GetDevice()->CreateInputLayout(ILDesc, ILDescArrSize, Vs->GetBlob()->GetBufferPointer(), Vs->GetBlob()->GetBufferSize(), &(NewInputLayout->InputLayout));
 	assert(SUCCEEDED(Result));
+
+	return NewInputLayout;
 }
 

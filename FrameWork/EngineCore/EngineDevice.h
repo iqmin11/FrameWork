@@ -65,13 +65,6 @@ private:
 	static ID3D11Texture2D* DepthStencileBuffer;
 	static ID3D11DepthStencilView* MainDSV;
 
-	//Resorces 
-	static ID3D11Buffer* VertexBuffer;
-	static UINT NumVerts;
-	static UINT Stride;
-	static UINT Offset;
-
-
 	//static ID3D11SamplerState Samplers;
 
 	// constrcuter destructer

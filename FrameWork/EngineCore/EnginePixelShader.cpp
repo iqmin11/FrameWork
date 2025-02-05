@@ -1,7 +1,6 @@
 #include "PrecompileHeader.h"
 #include "EnginePixelShader.h"
 
-#include "EngineDevice.h"
 #include "EngineBase/EngineFile.h"
 
 EnginePixelShader::EnginePixelShader() 

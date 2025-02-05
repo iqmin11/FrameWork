@@ -1,7 +1,6 @@
 #include "PrecompileHeader.h"
 #include "EngineVertexShader.h"
 
-#include "EngineDevice.h"
 #include "EngineBase/EngineFile.h"
 
 EngineVertexShader::EngineVertexShader() 

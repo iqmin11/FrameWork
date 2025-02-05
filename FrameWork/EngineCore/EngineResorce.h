@@ -1,6 +1,7 @@
 #pragma once
 #include "EngineBase/EnginePath.h"
 #include "EngineNameTag.h"
+#include "EngineDevice.h"
 
 // 설명 :
 //typedef int ResorceType;
@@ -38,6 +39,7 @@ public:
 			return FindIter->second;
 		}
 
+		assert("찾고자하는 리소스가 존재하지 않습니다.");
 		return nullptr;
 	}
 

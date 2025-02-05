@@ -7,8 +7,10 @@
 #include "EnginePlatform/EngineWindow.h"
 
 #include "EngineResorce.h"
+#include "EngineVertex.h"
 #include "EngineVertexShader.h"
 #include "EnginePixelShader.h"
+#include "EngineInputLayout.h"
 
 
 ID3D11Device1* EngineDevice::Device = nullptr;
@@ -18,9 +20,7 @@ ID3D11Texture2D* EngineDevice::BackBuffer = nullptr;
 ID3D11RenderTargetView* EngineDevice::MainRTV = nullptr;
 ID3D11Texture2D* EngineDevice::DepthStencileBuffer = nullptr;
 ID3D11DepthStencilView* EngineDevice::MainDSV = nullptr;
-ID3D11VertexShader* EngineDevice::VertexShader = nullptr;
-ID3D11PixelShader* EngineDevice::PixelShader = nullptr;
-ID3D11InputLayout* EngineDevice::InputLayout = nullptr;
+
 ID3D11Buffer* EngineDevice::VertexBuffer = nullptr;
 UINT EngineDevice::NumVerts;
 UINT EngineDevice::Stride;
@@ -47,7 +47,7 @@ void EngineDevice::Draw()
 	Context->OMSetRenderTargets(1, &MainRTV, nullptr);
 
 	Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	Context->IASetInputLayout(InputLayout);
+	Context->IASetInputLayout(EngineInputLayout::Find("Pos4_Col4")->GetIL());
 
 	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVs(), nullptr, 0);
 	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPs(), nullptr, 0);
@@ -203,28 +203,21 @@ void EngineDevice::CreateResorces()
 
 	// Create Pixel Shader
 	std::shared_ptr<EnginePixelShader> Ps = EnginePixelShader::Load(ShaderFile, "ps_main");
-
+	
 	// Create Input Layout
-	{
-		D3D11_INPUT_ELEMENT_DESC inputElementDesc[] =
-		{
-			{ "POS", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "COL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-		};
-
-		HRESULT hResult = Device->CreateInputLayout(inputElementDesc, ARRAYSIZE(inputElementDesc), Vs->GetBlob()->GetBufferPointer(), Vs->GetBlob()->GetBufferSize(), &InputLayout);
-		assert(SUCCEEDED(hResult));
-	}
+	EngineInputLayout::Load("Pos4_Col4", EngineVertex::LayOutDesc, ARRAYSIZE(EngineVertex::LayOutDesc), Vs);
 
 	// Create Vertex Buffer
 	{
-		float VertexData[] = 
-		{ // x, y, r, g, b, a
-			0.0f,  0.5f, 0.f, 1.f, 0.f, 1.f,
-			0.5f, -0.5f, 1.f, 0.f, 0.f, 1.f,
-			-0.5f, -0.5f, 0.f, 0.f, 1.f, 1.f
-		};
-		Stride = 6 * sizeof(float);
+		EngineVertex VertexData[3];
+		VertexData[0].POSITION = { 0.0f,  0.5f, 0.0f, 1.0f };
+		VertexData[0].COLOR = { 0.f, 1.f, 0.f, 1.f };
+		VertexData[1].POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
+		VertexData[1].COLOR = { 1.f, 0.f, 0.f, 1.f };
+		VertexData[2].POSITION = { -0.5f, -0.5f, 0.0f, 1.0f };
+		VertexData[2].COLOR = { 0.f, 0.f, 1.f, 1.f };
+
+		Stride = sizeof(EngineVertex);
 		NumVerts = sizeof(VertexData) / Stride;
 		Offset = 0;
 
@@ -376,18 +369,13 @@ void EngineDevice::Release()
 	//TestTriAngleResorece
 	EngineVertexShader::ResorcesClear();
 	EnginePixelShader::ResorcesClear();
+	EngineInputLayout::ResorcesClear();
 
-	//if (nullptr != PixelShader)
-	//{
-	//	PixelShader->Release();
-	//	PixelShader = nullptr;
-	//}
-
-	if (nullptr != InputLayout)
+	/*if (nullptr != InputLayout)
 	{
 		InputLayout->Release();
 		InputLayout = nullptr;
-	}
+	}*/
 
 	if (nullptr != VertexBuffer)
 	{

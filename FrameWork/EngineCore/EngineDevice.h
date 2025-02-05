@@ -66,9 +66,6 @@ private:
 	static ID3D11DepthStencilView* MainDSV;
 
 	//Resorces 
-	static ID3D11VertexShader* VertexShader;
-	static ID3D11PixelShader* PixelShader;
-	static ID3D11InputLayout* InputLayout;
 	static ID3D11Buffer* VertexBuffer;
 	static UINT NumVerts;
 	static UINT Stride;

@@ -4,7 +4,7 @@
 #include "EngineDirectBuffer.h"
 
 // Ό³Έν :
-typedef int VertexType;
+//typedef EngineVertex VertexType;
 class EngineVertexBuffer : public EngineResorce<EngineVertexBuffer>, public EngineDirectBuffer
 {
 public:
@@ -22,10 +22,10 @@ public:
 	static std::shared_ptr<EngineVertexBuffer> Load(std::string_view Name, const std::vector<VertexType>& VertexData)
 	{
 		std::shared_ptr<EngineVertexBuffer> NewVBuffer = EngineResorce::Create(Name);
-		NewVBuffer->LayOutInfo = VertexType::LayOutDesc;
+		NewVBuffer->LayOutInfo = VertexType::LayOutInfo.GetDescs().data();
 
 		NewVBuffer->Stride = sizeof(VertexType);
-		NewVBuffer->NumVerts = VertexData.size();
+		NewVBuffer->NumVerts = static_cast<UINT>(VertexData.size());
 		NewVBuffer->Offset = 0;
 
 		NewVBuffer->BufferDesc.ByteWidth = NewVBuffer->Stride * NewVBuffer->NumVerts;

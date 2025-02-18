@@ -43,12 +43,12 @@ void EngineDevice::Draw()
 	Context->OMSetRenderTargets(1, &MainRTV, nullptr);
 
 	Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	Context->IASetInputLayout(EngineInputLayout::Find("Pos4_Col4")->GetIL());
+	Context->IASetInputLayout(EngineInputLayout::Find("Pos4_Tex4_Col4")->GetIL());
 
 	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVs(), nullptr, 0);
 	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPs(), nullptr, 0);
 
-	std::shared_ptr<EngineVertexBuffer> EngineVb = EngineVertexBuffer::Find("Triangle");
+	std::shared_ptr<EngineVertexBuffer> EngineVb = EngineVertexBuffer::Find("Rect");
 	
 	EngineVb->Setting();
 	Context->Draw(EngineVb->GetNumVerts(), 0);
@@ -202,19 +202,50 @@ void EngineDevice::CreateResorces()
 	std::shared_ptr<EnginePixelShader> Ps = EnginePixelShader::Load(ShaderFile, "ps_main");
 	
 	// Create Input Layout
-	EngineInputLayout::Load("Pos4_Col4", EngineVertex::LayOutDesc, ARRAYSIZE(EngineVertex::LayOutDesc), Vs);
+	EngineVertex::LayOutInfo.AddInputLayOut("POS", DXGI_FORMAT_R32G32B32A32_FLOAT);
+	EngineVertex::LayOutInfo.AddInputLayOut("TEX", DXGI_FORMAT_R32G32B32A32_FLOAT);
+	EngineVertex::LayOutInfo.AddInputLayOut("COL", DXGI_FORMAT_R32G32B32A32_FLOAT);
+	
+	const std::vector<D3D11_INPUT_ELEMENT_DESC>& LayOutInfos = EngineVertex::LayOutInfo.GetDescs();
+	EngineInputLayout::Load("Pos4_Tex4_Col4", LayOutInfos.data(), static_cast<UINT>(LayOutInfos.size()), Vs);
 
 	// Create Vertex Data
-	std::vector<EngineVertex> VertexData(3);
-	VertexData[0].POSITION = { 0.0f,  0.5f, 0.0f, 1.0f };
-	VertexData[0].COLOR = { 0.f, 1.f, 0.f, 1.f };
+	std::vector<EngineVertex> VertexData(6);
+
+	//ÁÂ»ó
+	VertexData[0].POSITION = { -0.5f, 0.5f, 0.0f, 1.0f };
+	VertexData[0].TEXCOORD = { 0.0f,  0.0f, 0.0f, 1.0f };
+	VertexData[0].COLOR = { 0.0f, 0.0f, 0.0f, 1.0f };
+
+	//¿ìÇÏ
 	VertexData[1].POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
-	VertexData[1].COLOR = { 1.f, 0.f, 0.f, 1.f };
+	VertexData[1].TEXCOORD = { 0.0f,  1.0f, 0.0f, 1.0f };
+	VertexData[1].COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+	//ÁÂÇÏ
 	VertexData[2].POSITION = { -0.5f, -0.5f, 0.0f, 1.0f };
-	VertexData[2].COLOR = { 0.f, 0.f, 1.f, 1.f };
+	VertexData[2].TEXCOORD = { 1.0f,  1.0f, 0.0f, 1.0f };
+	VertexData[2].COLOR = { 0.5f, 0.5f, 0.5f, 1.0f };
+
+	//ÁÂ»ó
+	VertexData[3].POSITION = { -0.5f,  0.5f, 0.0f, 1.0f };
+	VertexData[3].TEXCOORD = { 0.0f,  0.0f, 0.0f, 1.0f };
+	VertexData[3].COLOR = { 0.0f, 0.0f, 0.0f, 1.0f };
+
+	//¿ì»ó
+	VertexData[4].POSITION = { 0.5f, 0.5f, 0.0f, 1.0f };
+	VertexData[4].TEXCOORD = { 1.0f, 1.0f, 0.0f, 1.0f };
+	VertexData[4].COLOR = { 0.5f, 0.5f, 0.5f, 1.0f };
+
+	//¿ìÇÏ
+	VertexData[5].POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
+	VertexData[5].TEXCOORD = { 1.0f,  0.0f, 0.0f, 1.0f };
+	VertexData[5].COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };
 	
 	// Create Vertex Buffer
-	EngineVertexBuffer::Load("Triangle", VertexData);
+	EngineVertexBuffer::Load("Rect", VertexData);
+
+
 }
 
 void EngineDevice::CreateDepthStencil()

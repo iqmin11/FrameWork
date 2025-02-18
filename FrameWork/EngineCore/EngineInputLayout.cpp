@@ -16,7 +16,7 @@ EngineInputLayout::~EngineInputLayout()
 	}
 }
 
-std::shared_ptr<EngineInputLayout> EngineInputLayout::Load(std::string_view ILName, D3D11_INPUT_ELEMENT_DESC* ILDesc, UINT ILDescArrSize, std::shared_ptr<EngineVertexShader> Vs)
+std::shared_ptr<EngineInputLayout> EngineInputLayout::Load(std::string_view ILName, const D3D11_INPUT_ELEMENT_DESC* ILDesc, UINT ILDescArrSize, std::shared_ptr<EngineVertexShader> Vs)
 {
 	if(Vs == nullptr)
 	{

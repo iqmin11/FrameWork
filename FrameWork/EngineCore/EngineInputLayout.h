@@ -15,7 +15,7 @@ public:
 	EngineInputLayout& operator=(const EngineInputLayout& _Other) = delete;
 	EngineInputLayout& operator=(EngineInputLayout&& _Other) noexcept = delete;
 
-	static std::shared_ptr<EngineInputLayout> Load(std::string_view ILName, D3D11_INPUT_ELEMENT_DESC* ILDesc, UINT ILDescArrSize, std::shared_ptr<class EngineVertexShader> Vs);
+	static std::shared_ptr<EngineInputLayout> Load(std::string_view ILName, const D3D11_INPUT_ELEMENT_DESC* ILDesc, UINT ILDescArrSize, std::shared_ptr<class EngineVertexShader> Vs);
 	ID3D11InputLayout* GetIL()
 	{
 		return InputLayout;

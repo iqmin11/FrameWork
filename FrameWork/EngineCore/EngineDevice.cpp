@@ -56,8 +56,8 @@ void EngineDevice::Draw()
 	Context->PSSetSamplers(0, 1, &tempSampler);
 
 	std::shared_ptr<EngineVertexBuffer> EngineVb = EngineVertexBuffer::Find("Rect");
-	
 	EngineVb->Setting();
+
 	Context->Draw(EngineVb->GetNumVerts(), 0);
 
 	SwapChain->Present(1, 0);

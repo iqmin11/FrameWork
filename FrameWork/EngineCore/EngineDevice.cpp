@@ -409,6 +409,7 @@ void EngineDevice::Release()
 	EnginePixelShader::ResorcesClear();
 	EngineInputLayout::ResorcesClear();
 	EngineVertexBuffer::ResorcesClear();
+	EngineSampler::ResorcesClear();
 
 	//RealLogic
 	if (nullptr != BackBuffer)

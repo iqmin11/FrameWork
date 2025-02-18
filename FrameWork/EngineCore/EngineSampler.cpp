@@ -7,6 +7,10 @@ EngineSampler::EngineSampler()
 
 EngineSampler::~EngineSampler() 
 {
+    if (SamplerState != nullptr)
+    {
+        SamplerState->Release();
+    }
 }
 
 std::shared_ptr<EngineSampler> EngineSampler::Load(std::string_view SamplerName, D3D11_SAMPLER_DESC Desc)

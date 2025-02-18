@@ -74,6 +74,9 @@
     <ClInclude Include="EngineDirectBuffer.h">
       <Filter>Resorces\Buffer</Filter>
     </ClInclude>
+    <ClInclude Include="EngineSampler.h">
+      <Filter>Resorces\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -146,6 +149,9 @@
     <ClCompile Include="EngineDirectBuffer.cpp">
       <Filter>Resorces\Buffer</Filter>
     </ClCompile>
+    <ClCompile Include="EngineSampler.cpp">
+      <Filter>Resorces\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -186,6 +192,9 @@
     </Filter>
     <Filter Include="Resorces\Buffer">
       <UniqueIdentifier>{6227d195-40a8-476a-9c9d-996e928fccc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resorces\Texture">
+      <UniqueIdentifier>{97d79c2c-163d-4a76-8c12-f67ba73af0a4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

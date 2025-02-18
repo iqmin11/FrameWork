@@ -12,6 +12,7 @@
 #include "EngineVertexShader.h"
 #include "EnginePixelShader.h"
 #include "EngineInputLayout.h"
+#include "EngineSampler.h"
 
 
 ID3D11Device1* EngineDevice::Device = nullptr;
@@ -244,6 +245,28 @@ void EngineDevice::CreateResorces()
 	
 	// Create Vertex Buffer
 	EngineVertexBuffer::Load("Rect", VertexData);
+
+	// Create Sampler
+	D3D11_SAMPLER_DESC samplerDesc = {};
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
+	samplerDesc.BorderColor[0] = 1.0f;
+	samplerDesc.BorderColor[1] = 1.0f;
+	samplerDesc.BorderColor[2] = 1.0f;
+	samplerDesc.BorderColor[3] = 1.0f;
+	samplerDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+
+	EngineSampler::Load("SpriteTexSampler", samplerDesc);
+
+	//Find Image File Path
+	EngineDirectory ImageDir;
+	ImageDir.MoveParentToChildPath("Image");
+	ImageDir.TryMove("Image");
+	EngineFile ImageFile = ImageDir.GetPlusFileName("testTexture.png");
+
+	//LoadImage
 
 
 }

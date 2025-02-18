@@ -16,6 +16,10 @@ public:
 	EngineSampler& operator=(EngineSampler&& _Other) noexcept = delete;
 	
 	static std::shared_ptr<EngineSampler> Load(std::string_view ShaderName, D3D11_SAMPLER_DESC Desc);
+	inline ID3D11SamplerState* GetSamplerState()
+	{
+		return SamplerState;
+	}
 
 protected:
 

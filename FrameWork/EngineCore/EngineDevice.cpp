@@ -13,6 +13,7 @@
 #include "EnginePixelShader.h"
 #include "EngineInputLayout.h"
 #include "EngineSampler.h"
+#include "EngineTexture.h"
 
 
 ID3D11Device1* EngineDevice::Device = nullptr;
@@ -48,6 +49,11 @@ void EngineDevice::Draw()
 
 	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVs(), nullptr, 0);
 	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPs(), nullptr, 0);
+
+	ID3D11ShaderResourceView* tempSRV = EngineTexture::Find("Test")->GetSRV();
+	ID3D11SamplerState* tempSampler = EngineSampler::Find("SpriteTexSampler")->GetSamplerState();
+	Context->PSSetShaderResources(0, 1, &tempSRV);
+	Context->PSSetSamplers(0, 1, &tempSampler);
 
 	std::shared_ptr<EngineVertexBuffer> EngineVb = EngineVertexBuffer::Find("Rect");
 	
@@ -220,12 +226,12 @@ void EngineDevice::CreateResorces()
 
 	//¿ìÇÏ
 	VertexData[1].POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
-	VertexData[1].TEXCOORD = { 0.0f,  1.0f, 0.0f, 1.0f };
+	VertexData[1].TEXCOORD = { 1.0f,  1.0f, 0.0f, 1.0f };
 	VertexData[1].COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	//ÁÂÇÏ
 	VertexData[2].POSITION = { -0.5f, -0.5f, 0.0f, 1.0f };
-	VertexData[2].TEXCOORD = { 1.0f,  1.0f, 0.0f, 1.0f };
+	VertexData[2].TEXCOORD = { 0.0f,  1.0f, 0.0f, 1.0f };
 	VertexData[2].COLOR = { 0.5f, 0.5f, 0.5f, 1.0f };
 
 	//ÁÂ»ó
@@ -235,12 +241,12 @@ void EngineDevice::CreateResorces()
 
 	//¿ì»ó
 	VertexData[4].POSITION = { 0.5f, 0.5f, 0.0f, 1.0f };
-	VertexData[4].TEXCOORD = { 1.0f, 1.0f, 0.0f, 1.0f };
+	VertexData[4].TEXCOORD = { 1.0f, 0.0f, 0.0f, 1.0f };
 	VertexData[4].COLOR = { 0.5f, 0.5f, 0.5f, 1.0f };
 
 	//¿ìÇÏ
 	VertexData[5].POSITION = { 0.5f, -0.5f, 0.0f, 1.0f };
-	VertexData[5].TEXCOORD = { 1.0f,  0.0f, 0.0f, 1.0f };
+	VertexData[5].TEXCOORD = { 1.0f,  1.0f, 0.0f, 1.0f };
 	VertexData[5].COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };
 	
 	// Create Vertex Buffer
@@ -267,7 +273,7 @@ void EngineDevice::CreateResorces()
 	EngineFile ImageFile = ImageDir.GetPlusFileName("testTexture.png");
 
 	//LoadImage
-
+	EngineTexture::Load(ImageFile, "Test");
 
 }
 
@@ -410,6 +416,7 @@ void EngineDevice::Release()
 	EngineInputLayout::ResorcesClear();
 	EngineVertexBuffer::ResorcesClear();
 	EngineSampler::ResorcesClear();
+	EngineTexture::ResorcesClear();
 
 	//RealLogic
 	if (nullptr != BackBuffer)

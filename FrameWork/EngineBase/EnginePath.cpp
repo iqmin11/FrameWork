@@ -66,11 +66,6 @@ std::string EnginePath::GetFileName() const
 	return Path.filename().string();
 }
 
-std::string EnginePath::GetFullPath() const
-{
-	return Path.string();
-}
-
 std::string EnginePath::GetExtension() const
 {
 	return Path.extension().string();

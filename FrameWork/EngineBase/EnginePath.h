@@ -20,7 +20,16 @@ public:
 	static std::string GetFolderPath(std::string_view _Path);
 
 	std::string GetFileName() const;
-	std::string GetFullPath() const;
+	std::string GetFullPathToString() const
+	{
+		return Path.string();
+	}
+
+	std::wstring GetFullPathToWstring() const
+	{
+		return Path.wstring();
+	}
+
 	std::string GetExtension() const;
 
 	virtual bool TryMoveParent();
@@ -40,6 +49,8 @@ public:
 	bool TryMove(std::string_view _Path);
 
 	void SetPath(std::string_view _Path);
+
+
 
 protected:
 

@@ -77,6 +77,12 @@
     <ClInclude Include="EngineSampler.h">
       <Filter>Resorces\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h">
+      <Filter>ThirdParty\DirectXTex\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTexture.h">
+      <Filter>Resorces\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -152,6 +158,9 @@
     <ClCompile Include="EngineSampler.cpp">
       <Filter>Resorces\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="EngineTexture.cpp">
+      <Filter>Resorces\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -196,5 +205,42 @@
     <Filter Include="Resorces\Texture">
       <UniqueIdentifier>{97d79c2c-163d-4a76-8c12-f67ba73af0a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{1d978d1d-ea98-4faf-ab9e-c7d4d2b1f014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex">
+      <UniqueIdentifier>{727b6015-e48b-4a42-ad4e-18683cc8ca27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex\bin">
+      <UniqueIdentifier>{67e1fec0-e600-4eb0-8129-8c3b076c658c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex\Header">
+      <UniqueIdentifier>{0fd9c99e-b30e-4213-8f07-b0ee207ebd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex\bin\Debug">
+      <UniqueIdentifier>{809d0eb0-f249-40d2-a2ab-4f2a3f0fa383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex\bin\Release">
+      <UniqueIdentifier>{a55edd2f-45e6-4280-9040-fa290ea8bd72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">
+      <Filter>ThirdParty\DirectXTex\Header</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="ThirdParty\DirectXTex\lib\x64\Debug\DirectXTex.lib">
+      <Filter>ThirdParty\DirectXTex\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\DirectXTex\lib\x64\Release\DirectXTex.lib">
+      <Filter>ThirdParty\DirectXTex\bin\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\DirectXTex\lib\x64\Debug\DirectXTex.pdb">
+      <Filter>ThirdParty\DirectXTex\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\DirectXTex\lib\x64\Release\DirectXTex.pdb">
+      <Filter>ThirdParty\DirectXTex\bin\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

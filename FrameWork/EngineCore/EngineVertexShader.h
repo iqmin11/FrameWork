@@ -18,7 +18,7 @@ public:
 
 	static std::shared_ptr<EngineVertexShader> Load(class EngineFile ShaderFile, std::string_view ShaderName);
 
-	ID3D11VertexShader* GetVs()
+	ID3D11VertexShader* GetVertexShader()
 	{
 		return VertexShader;
 	}

@@ -18,7 +18,7 @@ public:
 
 	static std::shared_ptr<EnginePixelShader> Load(class EngineFile ShaderFile, std::string_view ShaderName);
 
-	ID3D11PixelShader* GetPs()
+	ID3D11PixelShader* GetPixelShader()
 	{
 		return PixelShader;
 	}

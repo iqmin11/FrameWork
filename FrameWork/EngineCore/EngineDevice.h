@@ -65,8 +65,6 @@ private:
 	static ID3D11Texture2D* DepthStencileBuffer;
 	static ID3D11DepthStencilView* MainDSV;
 
-	//static ID3D11SamplerState Samplers;
-
 	// constrcuter destructer
 	EngineDevice();
 	~EngineDevice();

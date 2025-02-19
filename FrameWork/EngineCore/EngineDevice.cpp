@@ -45,10 +45,10 @@ void EngineDevice::Draw()
 	Context->OMSetRenderTargets(1, &MainRTV, nullptr);
 
 	Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	Context->IASetInputLayout(EngineInputLayout::Find("Pos4_Tex4_Col4")->GetIL());
+	Context->IASetInputLayout(EngineInputLayout::Find("Pos4_Tex4_Col4")->GetInputLayout());
 
-	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVs(), nullptr, 0);
-	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPs(), nullptr, 0);
+	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVertexShader(), nullptr, 0);
+	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPixelShader(), nullptr, 0);
 
 	ID3D11ShaderResourceView* tempSRV = EngineTexture::Find("Test")->GetSRV();
 	ID3D11SamplerState* tempSampler = EngineSampler::Find("SpriteTexSampler")->GetSamplerState();

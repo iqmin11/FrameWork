@@ -2,6 +2,8 @@
 #include "EngineResorce.h"
 #include <EngineCore/ThirdParty/DirectXTex/inc/DirectXTex.h>
 
+
+
 // Ό³Έν :
 class EngineTexture : public EngineResorce<EngineTexture>
 {
@@ -29,7 +31,7 @@ private:
 	ID3D11Texture2D* Texture2D = nullptr;
 	ID3D11ShaderResourceView* SRV = nullptr;
 	
-	DirectX::TexMetadata Data = {};
+	DirectX::TexMetadata MetaData = {};
 	DirectX::ScratchImage Image = {};
 
 	D3D11_TEXTURE2D_DESC TextureDesc = {};

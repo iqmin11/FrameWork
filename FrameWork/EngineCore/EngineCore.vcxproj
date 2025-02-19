@@ -252,6 +252,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h" />
+    <ClInclude Include="ThirdParty\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineActor.cpp">

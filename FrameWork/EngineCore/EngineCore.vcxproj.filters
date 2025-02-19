@@ -83,6 +83,9 @@
     <ClInclude Include="EngineTexture.h">
       <Filter>Resorces\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="ThirdParty\stb\stb_image.h">
+      <Filter>ThirdParty\STB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -222,6 +225,9 @@
     </Filter>
     <Filter Include="ThirdParty\DirectXTex\bin\Release">
       <UniqueIdentifier>{a55edd2f-45e6-4280-9040-fa290ea8bd72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\STB">
+      <UniqueIdentifier>{5575f1c8-83f0-4a90-bdd4-760196822b3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

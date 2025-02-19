@@ -34,7 +34,7 @@ EngineDevice::~EngineDevice()
 
 void EngineDevice::Draw()
 {
-	FLOAT backgroundColor[4] = { 0.1f, 0.2f, 0.6f, 1.0f };
+	FLOAT backgroundColor[4] = { 1.0f, 0.0f, 1.0f, 1.0f };
 	Context->ClearRenderTargetView(GetRTV(), backgroundColor);
 
 	RECT winRect;

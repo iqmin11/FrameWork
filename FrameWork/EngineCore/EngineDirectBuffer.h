@@ -14,9 +14,14 @@ public:
 	EngineDirectBuffer& operator=(const EngineDirectBuffer& _Other) = delete;
 	EngineDirectBuffer& operator=(EngineDirectBuffer&& _Other) noexcept = delete;
 
-	UINT GetBufferSize()
+	UINT GetBufferSize() const
 	{
 		return BufferDesc.ByteWidth;
+	}
+
+	ID3D11Buffer* GetBuffer() const
+	{
+		return Buffer;
 	}
 
 protected:

@@ -21,7 +21,7 @@ public:
 	template <typename VertexType>
 	static std::shared_ptr<EngineVertexBuffer> Load(std::string_view Name, const std::vector<VertexType>& VertexData)
 	{
-		std::shared_ptr<EngineVertexBuffer> NewVBuffer = EngineResorce::Create(Name);
+		std::shared_ptr<EngineVertexBuffer> NewVBuffer = Create(Name);
 		NewVBuffer->LayOutInfo = VertexType::LayOutInfo.GetDescs().data();
 
 		NewVBuffer->Stride = sizeof(VertexType);
@@ -40,22 +40,17 @@ public:
 		return NewVBuffer;
 	}
 
-	ID3D11Buffer* GetVb()
-	{
-		return Buffer;
-	}
-
-	UINT GetStride()
+	UINT GetStride() const
 	{
 		return Stride;
 	}
 
-	UINT GetNumVerts()
+	UINT GetNumVerts() const
 	{
 		return NumVerts;
 	}
 
-	UINT GetOffset()
+	UINT GetOffset() const
 	{
 		return Offset;
 	}

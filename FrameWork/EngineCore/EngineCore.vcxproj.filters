@@ -86,6 +86,9 @@
     <ClInclude Include="ThirdParty\stb\stb_image.h">
       <Filter>ThirdParty\STB</Filter>
     </ClInclude>
+    <ClInclude Include="EngineConstantBuffer.h">
+      <Filter>Resorces\Buffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="EngineTexture.cpp">
       <Filter>Resorces\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineConstantBuffer.cpp">
+      <Filter>Resorces\Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

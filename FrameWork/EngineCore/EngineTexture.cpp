@@ -43,13 +43,16 @@ void EngineTexture::ResLoad(const EnginePath& Path)
 	std::string Ext = EngineString::ToUpper(Path.GetExtension());
 	std::wstring WPath = Path.GetFullPathToWstring();
 
+	//DirectXTex 라이브러리를 활용하여, ScratchImage 로드
 	HRESULT Result;
 	Result = DirectX::LoadFromWICFile(WPath.c_str(), DirectX::WIC_FLAGS_DEFAULT_SRGB, &MetaData, Image);
 	assert(SUCCEEDED(Result));
 
+	//ScratchImage로 SRV 생성
 	Result = DirectX::CreateShaderResourceView(EngineDevice::GetDevice(), Image.GetImages(), Image.GetImageCount(), Image.GetMetadata(), &SRV);
 	assert(SUCCEEDED(Result));
 
+	//Texture2D를 활용한 SRV생성 방법
 	//TextureDesc.Width = static_cast<UINT>(MetaData.width);
 	//TextureDesc.Height = static_cast<UINT>(MetaData.height);
 	//TextureDesc.MipLevels = MetaData.mipLevels;

@@ -14,6 +14,7 @@
 #include "EngineInputLayout.h"
 #include "EngineSampler.h"
 #include "EngineTexture.h"
+#include "EngineConstantBuffer.h"
 
 
 ID3D11Device1* EngineDevice::Device = nullptr;
@@ -34,7 +35,10 @@ EngineDevice::~EngineDevice()
 
 void EngineDevice::Draw()
 {
-	FLOAT backgroundColor[4] = { 1.0f, 0.0f, 1.0f, 1.0f };
+	std::shared_ptr<EngineConstantBuffer> CBuffer = EngineConstantBuffer::Find("Pos_Col");
+	CBuffer->SetData(nullptr, 0);
+
+	FLOAT backgroundColor[4] = { 0.1f, 0.2f, 0.6f, 1.0f };
 	Context->ClearRenderTargetView(GetRTV(), backgroundColor);
 
 	RECT winRect;
@@ -49,6 +53,9 @@ void EngineDevice::Draw()
 
 	Context->VSSetShader(EngineVertexShader::Find("vs_main")->GetVertexShader(), nullptr, 0);
 	Context->PSSetShader(EnginePixelShader::Find("ps_main")->GetPixelShader(), nullptr, 0);
+
+	ID3D11Buffer* CBufferPtr = CBuffer->GetBuffer();
+	Context->VSSetConstantBuffers(0, 1, &CBufferPtr);
 
 	ID3D11ShaderResourceView* tempSRV = EngineTexture::Find("Test")->GetSRV();
 	ID3D11SamplerState* tempSampler = EngineSampler::Find("SpriteTexSampler")->GetSamplerState();
@@ -274,6 +281,9 @@ void EngineDevice::CreateResorces()
 
 	//LoadImage
 	EngineTexture::Load(ImageFile, "Test");
+
+	//LoadConstantBuffer
+	EngineConstantBuffer::Load("Pos_Col");
 
 }
 

@@ -10,22 +10,32 @@
 // 다이렉트용 벡터
 #include <DirectXMath.h>
 
-// final 더이상 상속내릴지 못한다.
-// 상속도 못하고 만들지도 못하게 만든 상태로
-
-class EngineMath final
+class EngineMath
 {
 public:
+	static const float PI;
+	static const float PI2;
+
+	static float Rad2Deg(float Rad)
+	{
+		return (180.0f / PI) * Rad;
+	}
+
+	static float Deg2Rad(float Deg)
+	{
+		return (PI / 180.0f) * Deg;
+	}
 
 private:
 	virtual ~EngineMath() = 0;
 };
 
-struct float4
+struct alignas(16) float4
 {
 	static const float4 ZERO;
+	static const float4 ZERONULL;
+	static const float4 ONE;
 
-public:
 	union
 	{
 		struct
@@ -36,8 +46,31 @@ public:
 			float w;
 		};
 
+		struct
+		{
+			float r;
+			float g;
+			float b;
+			float a;
+		};
+
+		struct
+		{
+			float left;
+			float top;
+			float right;
+			float bottom;
+		};
+
 		float Arr1D[4];
+		DirectX::XMFLOAT4 DirectFloat4;
+		DirectX::XMVECTOR DirectVector;
 	};
+
+	operator DirectX::FXMVECTOR() const
+	{
+		return DirectVector;
+	}
 
 	float4()
 		: x(0.0f), y(0.0f), z(0.0f), w(1.0f)
@@ -175,6 +208,98 @@ public:
 		return { x * 0.5f,y * 0.5f,z * 0.5f,w };
 	}
 
+	static float4 Deg2Rad(const float4& Deg)
+	{
+		return float4(EngineMath::Deg2Rad(Deg.x), EngineMath::Deg2Rad(Deg.y), EngineMath::Deg2Rad(Deg.z), 0.0f);
+	}
+
+	static float4 Rad2Deg(const float4& Rad)
+	{
+		return float4(EngineMath::Rad2Deg(Rad.x), EngineMath::Rad2Deg(Rad.y), EngineMath::Rad2Deg(Rad.z), 0.0f);
+	}
+
+	static float4 Euler2Quaternion(const float4& Rad)
+	{
+		float4 Ret;
+		Ret.DirectVector = DirectX::XMQuaternionRotationRollPitchYawFromVector(Rad);
+		return Ret;
+	}
+
 };
+
+struct float4x4
+{
+	static const float4x4 IdentityMatrix;
+
+	float4x4()
+		: DirectMatrix(DirectX::XMMatrixIdentity())
+	{
+
+	}
+
+	float4x4(const DirectX::XMMATRIX& Other)
+		: DirectMatrix(Other)
+	{
+
+	}
+
+	union
+	{
+		DirectX::XMMATRIX DirectMatrix;
+
+		struct
+		{
+			float _11;
+			float _12;
+			float _13;
+			float _14;
+			float _21;
+			float _22;
+			float _23;
+			float _24;
+			float _31;
+			float _32;
+			float _33;
+			float _34;
+			float _41;
+			float _42;
+			float _43;
+			float _44;
+		};
+
+		float Arr1D[16];
+		float Arr2D[4][4];
+		float4 VectorArr[4];
+	};
+
+	operator DirectX::FXMMATRIX() const
+	{
+		return DirectMatrix;
+	}
+
+	static float4x4 Compose(const float4& Scale, const float4& Rot, const float4& Pos)
+	{
+		float4 Quaternion = float4::Euler2Quaternion(Rot);
+		return DirectX::XMMatrixAffineTransformation(Scale, Rot, Quaternion, Pos);
+	}
+
+	static float4x4 Inverse(const float4x4& Matrix)
+	{
+		float4x4 Ret = Matrix;
+		return DirectX::XMMatrixInverse(nullptr, Ret);
+	}
+
+	void Inverse()
+	{
+		DirectX::XMMatrixInverse(nullptr, *this);
+	}
+
+	float4x4 operator*(const float4x4& Other)
+	{
+		return DirectX::XMMatrixMultiply(*this, Other);
+	}
+};
+
+
 
 

@@ -44,6 +44,9 @@ protected:
 private:
 	std::map<int, std::vector<std::shared_ptr<EngineActor>>> Actors;
 	void ActorInit(std::shared_ptr<EngineActor> _Actor, int _Order);
-	void ActorUpdate(float _DeltaTime);
+
+	void ActorUpdate(float DeltaTime);
+	void ActorTransformUpdate(float DeltaTime);
+	void ActorLateUpdate(float DeltaTime);
 	void ActorRelease();
 };

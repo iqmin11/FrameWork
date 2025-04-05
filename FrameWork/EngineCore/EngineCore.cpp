@@ -31,11 +31,13 @@ void EngineCore::CoreInit(HINSTANCE hInst, std::string_view TitleName, std::func
 
 void EngineCore::CoreTick()
 {
+	//레벨 바꾸기
 	if (HasLevelChanged())
 	{
 		LevelChangeProc();
 	}
 
+	//델타타임 계산
 	float TimeDeltaTime = EngineTime::GlobalTime.TimeCheck();
 
 	if (CurUpdatedLevel == nullptr)
@@ -46,6 +48,8 @@ void EngineCore::CoreTick()
 
 	CurUpdatedLevel->Tick(TimeDeltaTime);
 	CurUpdatedLevel->ActorUpdate(TimeDeltaTime);
+	CurUpdatedLevel->ActorTransformUpdate(TimeDeltaTime);
+	CurUpdatedLevel->ActorLateUpdate(TimeDeltaTime);
 
 	//EngineDevice::RenderStart();
 	EngineDevice::Draw();

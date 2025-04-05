@@ -35,7 +35,9 @@ void EngineLevel::ActorInit(std::shared_ptr<EngineActor> _Actor, int _Order)
 	_Actor->Begin();
 }
 
-void EngineLevel::ActorUpdate(float _DeltaTime)
+
+
+void EngineLevel::ActorUpdate(float DeltaTime)
 {
 	{
 		// 이건 나중에 만들어질 랜더러의 랜더가 다 끝나고 되는 랜더가 될겁니다.
@@ -51,10 +53,18 @@ void EngineLevel::ActorUpdate(float _DeltaTime)
 			{
 				std::shared_ptr<EngineActor>& Actor = *ActorStart;
 
-				Actor->Tick(_DeltaTime);
+				Actor->Tick(DeltaTime);
 			}
 		}
 	}
+}
+
+void EngineLevel::ActorTransformUpdate(float DeltaTime)
+{
+}
+
+void EngineLevel::ActorLateUpdate(float DeltaTime)
+{
 }
 
 void EngineLevel::ActorRelease()

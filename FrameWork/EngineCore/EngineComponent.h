@@ -16,7 +16,7 @@ public:
 
 protected:
 	void Begin() override;
-	void Tick(float DeltaTime) override;
+	virtual void Tick(float DeltaTime) override;
 
 private:
 

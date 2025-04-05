@@ -89,9 +89,6 @@
     <ClInclude Include="EngineConstantBuffer.h">
       <Filter>Resorces\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="EngineTransform.h">
-      <Filter>Object</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -172,9 +169,6 @@
     </ClCompile>
     <ClCompile Include="EngineConstantBuffer.cpp">
       <Filter>Resorces\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineTransform.cpp">
-      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

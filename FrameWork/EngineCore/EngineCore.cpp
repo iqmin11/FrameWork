@@ -8,6 +8,8 @@
 #include "EngineGUI.h"
 
 std::shared_ptr<EngineLevel> EngineCore::CurUpdatedLevel = nullptr;
+std::shared_ptr<EngineLevel> EngineCore::ChangeRequestLevel = nullptr;
+
 std::map<std::string, std::shared_ptr<EngineLevel>> EngineCore::LevelManager;
 
 EngineCore::EngineCore()
@@ -29,6 +31,11 @@ void EngineCore::CoreInit(HINSTANCE hInst, std::string_view TitleName, std::func
 
 void EngineCore::CoreTick()
 {
+	if (HasLevelChanged())
+	{
+		LevelChangeProc();
+	}
+
 	float TimeDeltaTime = EngineTime::GlobalTime.TimeCheck();
 
 	if (CurUpdatedLevel == nullptr)
@@ -72,5 +79,22 @@ void EngineCore::EngineEnd(std::function<void()> ContentsEnd)
 	EngineGUI::Release();
 	EngineDevice::Release();
 	EngineWindow::WinodwRelease();
+}
+
+bool EngineCore::HasLevelChanged()
+{
+	return ChangeRequestLevel != nullptr;
+}
+
+void EngineCore::LevelChangeProc()
+{
+	std::shared_ptr<EngineLevel> PrevLevel = std::move(CurUpdatedLevel);
+	if (PrevLevel != nullptr)
+	{
+		PrevLevel->OnLevelExit();
+	}
+
+	ChangeRequestLevel->OnLevelEnter();
+	CurUpdatedLevel = std::move(ChangeRequestLevel);
 }
 

@@ -10,6 +10,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
-	EngineCore::CoreInit(hInstance, "ChatServer", ContentsCore::ContentsBegin, ContentsCore::ContentsEnd);
+	EngineCore::CoreInit(hInstance, "EngineFrameWork", ContentsCore::ContentsBegin, ContentsCore::ContentsEnd);
 	return 0;
 }

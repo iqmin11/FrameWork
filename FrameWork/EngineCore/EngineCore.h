@@ -52,6 +52,7 @@ public:
 		return std::dynamic_pointer_cast<LevelType>(NewLevel);
 	}
 
+	//Level Change Interface
 	static void ChangeLevel(std::string_view LevelName)
 	{
 		std::string FindName = LevelName.data();
@@ -63,13 +64,15 @@ public:
 			MsgAssert("찾고자 하는 레벨이 없습니다");
 		}
 
-		CurUpdatedLevel = FindIter->second;
+		ChangeRequestLevel = FindIter->second;
 	}
 
 protected:
 
 
 private:
+
+	//EngineCoreBase
 	static std::shared_ptr<EngineLevel> CurUpdatedLevel;
 
 	static void EngineBegin(std::function<void()> ContentsBegin = nullptr);
@@ -77,5 +80,10 @@ private:
 
 	static std::map<std::string, std::shared_ptr<EngineLevel>> LevelManager;
 
+	//Change Level
+	static std::shared_ptr<EngineLevel> ChangeRequestLevel;
+
+	static bool HasLevelChanged();
+	static void LevelChangeProc();
 };
 

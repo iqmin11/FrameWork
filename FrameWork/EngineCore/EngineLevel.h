@@ -37,7 +37,9 @@ public:
 
 protected:
 	void Begin() override;
+	virtual void OnLevelEnter();
 	void Tick(float DeltaTime) override;
+	virtual void OnLevelExit();
 
 private:
 	std::map<int, std::vector<std::shared_ptr<EngineActor>>> Actors;

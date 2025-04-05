@@ -227,10 +227,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EngineTransform.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EngineVertex.h">
       <SubType>
       </SubType>
@@ -320,10 +316,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineTexture.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="EngineTransform.cpp">
       <SubType>
       </SubType>
     </ClCompile>

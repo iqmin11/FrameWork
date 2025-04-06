@@ -11,10 +11,11 @@ EngineComponent::~EngineComponent()
 
 }
 
-void EngineComponent::Begin()
+const std::shared_ptr<class EngineObject> EngineComponent::GetParent()
 {
+	return GetTransformRef().GetParent()->GetMaster();
 }
 
-void EngineComponent::Tick(float DeltaTime)
+void EngineComponent::Begin()
 {
 }

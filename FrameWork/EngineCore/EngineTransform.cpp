@@ -9,11 +9,16 @@ EngineTransform::~EngineTransform()
 {
 }
 
+const std::shared_ptr<class EngineObject> EngineTransform::GetMaster() const
+{
+	return Master.lock();
+}
+
 void EngineTransform::TransformUpdate()
 {
 	CalLocalTransform();
 	WorldMatrix = LocalMatrix;
-	if (Parent != nullptr)
+	if (!Parent.expired())
 	{
 		CalWorldTransform();
 	}
@@ -29,7 +34,7 @@ void EngineTransform::CalLocalTransform()
 
 void EngineTransform::CalWorldTransform()
 {
-	WorldMatrix = LocalMatrix * Parent->WorldMatrix;
+	WorldMatrix = LocalMatrix * Parent.lock()->WorldMatrix;
 }
 
 void EngineTransform::UpdateLocalFromWorld()
@@ -38,10 +43,10 @@ void EngineTransform::UpdateLocalFromWorld()
 	WorldQuaternion = float4::Rad2Quaternion(WorldRad);
 	WorldMatrix = float4x4::Compose(WorldScale, WorldRad, WorldQuaternion, WorldPosition);
 
-	if (Parent != nullptr)
+	if (Parent.expired())
 	{
 		//부모월드의 역행렬 구하고, 현재 월드에 곱해서 로컬을 구함
-		float4x4 ParentWorldInverse = Parent->GetWorldMatrix();
+		float4x4 ParentWorldInverse = Parent.lock()->GetWorldMatrix();
 		ParentWorldInverse.Inverse();
 		LocalMatrix = WorldMatrix * ParentWorldInverse;
 	}

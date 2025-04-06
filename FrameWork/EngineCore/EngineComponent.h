@@ -14,9 +14,10 @@ public:
 	EngineComponent& operator=(const EngineComponent& _Other) = delete;
 	EngineComponent& operator=(EngineComponent&& _Other) noexcept = delete;
 
+	const std::shared_ptr<EngineObject> GetParent();
+
 protected:
 	void Begin() override;
-	virtual void Tick(float DeltaTime) override;
 
 private:
 

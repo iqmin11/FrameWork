@@ -218,13 +218,48 @@ struct alignas(16) float4
 		return float4(EngineMath::Rad2Deg(Rad.x), EngineMath::Rad2Deg(Rad.y), EngineMath::Rad2Deg(Rad.z), 0.0f);
 	}
 
-	static float4 Euler2Quaternion(const float4& Rad)
+	static float4 Rad2Quaternion(const float4& Rad)
 	{
 		float4 Ret;
 		Ret.DirectVector = DirectX::XMQuaternionRotationRollPitchYawFromVector(Rad);
 		return Ret;
 	}
 
+	static float4 Quaternion2Rad(const float4& Quat)
+	{
+		float4 Ret;
+		const float& x = Quat.x;
+		const float& y = Quat.y;
+		const float& z = Quat.z;
+		const float& w = Quat.w;
+
+		float sinrCosp = 2.0f * (w * z + x * y);
+		float cosrCosp = 1.0f - 2.0f * (z * z + x * x);
+		Ret.z = atan2f(sinrCosp, cosrCosp);
+
+		float pitchTest = w * x - y * z;
+		float asinThreshold = 0.4999995f;
+		float sinp = 2.0f * pitchTest;
+
+		if (pitchTest < -asinThreshold)
+		{
+			Ret.x = -(0.5f * EngineMath::PI);
+		}
+		else if (pitchTest > asinThreshold)
+		{
+			Ret.x = (0.5f * EngineMath::PI);
+		}
+		else
+		{
+			Ret.x = asinf(sinp);
+		}
+
+		float sinyCosp = 2.0f * (w * y + x * z);
+		float cosyCosp = 1.0f - 2.0f * (x * x + y * y);
+		Ret.y = atan2f(sinyCosp, cosyCosp);
+
+		return Ret;
+	}
 };
 
 struct float4x4
@@ -277,10 +312,14 @@ struct float4x4
 		return DirectMatrix;
 	}
 
-	static float4x4 Compose(const float4& Scale, const float4& Rot, const float4& Pos)
+	static float4x4 Compose(const float4& Scale, const float4& Rad, const float4& Quaternion, const float4& Pos)
 	{
-		float4 Quaternion = float4::Euler2Quaternion(Rot);
-		return DirectX::XMMatrixAffineTransformation(Scale, Rot, Quaternion, Pos);
+		return DirectX::XMMatrixAffineTransformation(Scale, Rad, Quaternion, Pos);
+	}
+
+	void Decompose(float4& OutScale, float4& OutQuat, float4& OutPos)
+	{
+		DirectX::XMMatrixDecompose(&OutScale.DirectVector, &OutQuat.DirectVector, &OutPos.DirectVector, *this);
 	}
 
 	static float4x4 Inverse(const float4x4& Matrix)
@@ -298,6 +337,7 @@ struct float4x4
 	{
 		return DirectX::XMMatrixMultiply(*this, Other);
 	}
+
 };
 
 

@@ -49,7 +49,7 @@ void EngineCore::CoreTick()
 	CurUpdatedLevel->Tick(TimeDeltaTime);
 	CurUpdatedLevel->ActorUpdate(TimeDeltaTime);
 	CurUpdatedLevel->ActorTransformUpdate(TimeDeltaTime);
-	CurUpdatedLevel->ActorLateUpdate(TimeDeltaTime);
+	//CurUpdatedLevel->ActorLateUpdate(TimeDeltaTime);
 
 	//EngineDevice::RenderStart();
 	EngineDevice::Draw();

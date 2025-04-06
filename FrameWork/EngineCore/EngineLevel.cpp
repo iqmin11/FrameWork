@@ -32,35 +32,40 @@ void EngineLevel::OnLevelExit()
 void EngineLevel::ActorInit(std::shared_ptr<EngineActor> _Actor, int _Order)
 {
 	this->Actors[_Order].push_back(_Actor);
+	_Actor->Init_Internal();
 	_Actor->Begin();
 }
 
-
-
 void EngineLevel::ActorUpdate(float DeltaTime)
 {
+	auto GroupEndIter = Actors.end();
+
+	for (auto GroupStartIter = Actors.begin(); GroupStartIter != GroupEndIter; ++GroupStartIter)
 	{
-		// 이건 나중에 만들어질 랜더러의 랜더가 다 끝나고 되는 랜더가 될겁니다.
-		std::map<int, std::vector<std::shared_ptr<EngineActor>>>::iterator GroupEndIter = Actors.end();
+		std::vector<std::shared_ptr<EngineActor>>& ActorGroup = GroupStartIter->second;
+		size_t CurActorGroupSize = ActorGroup.size();
 
-		for (auto GroupStartIter = Actors.begin(); GroupStartIter != GroupEndIter; ++GroupStartIter)
+		for (int i = 0; i < CurActorGroupSize; ++i)
 		{
-			std::vector<std::shared_ptr<EngineActor>>& ActorList = GroupStartIter->second;
-
-			std::vector<std::shared_ptr<EngineActor>>::iterator ActorEnd = ActorList.end();
-
-			for (auto ActorStart = ActorList.begin(); ActorStart != ActorEnd; ++ActorStart)
-			{
-				std::shared_ptr<EngineActor>& Actor = *ActorStart;
-
-				Actor->Tick(DeltaTime);
-			}
+			ActorGroup[i]->Tick(DeltaTime);
 		}
 	}
 }
 
 void EngineLevel::ActorTransformUpdate(float DeltaTime)
 {
+	auto GroupEndIter = Actors.end();
+
+	for (auto GroupStartIter = Actors.begin(); GroupStartIter != GroupEndIter; ++GroupStartIter)
+	{
+		std::vector<std::shared_ptr<EngineActor>>& ActorGroup = GroupStartIter->second;
+		size_t CurActorGroupSize = ActorGroup.size();
+
+		for (int i = 0; i < CurActorGroupSize; ++i)
+		{
+			ActorGroup[i]->GetTransformRef().TransformUpdate();
+		}
+	}
 }
 
 void EngineLevel::ActorLateUpdate(float DeltaTime)

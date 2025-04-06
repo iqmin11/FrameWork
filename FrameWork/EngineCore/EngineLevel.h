@@ -3,6 +3,7 @@
 #include "EngineCore.h"
 
 class EngineActor;
+class EngineRenderer;
 class EngineLevel : public EngineObject
 {
 	friend EngineCore;
@@ -17,7 +18,7 @@ public:
 	EngineLevel& operator=(EngineLevel&& _Other) noexcept = delete;
 
 	template<typename ActorType>
-	std::shared_ptr<ActorType> CreateActor(int _Order = 0, const std::string_view& _Name = "")
+	std::shared_ptr<ActorType> CreateActor(int _Order = 0, std::string_view _Name = "")
 	{
 		std::shared_ptr<EngineActor> NewActor = std::make_shared<ActorType>();
 
@@ -35,6 +36,8 @@ public:
 		return std::dynamic_pointer_cast<ActorType>(NewActor);
 	}
 
+	void PushRenderer(std::shared_ptr<EngineRenderer> Renderer);
+
 protected:
 	void Begin() override;
 	virtual void OnLevelEnter();
@@ -49,4 +52,6 @@ private:
 	void ActorTransformUpdate(float DeltaTime);
 	void ActorLateUpdate(float DeltaTime);
 	void ActorRelease();
+
+	std::map<int, std::vector<std::shared_ptr<EngineRenderer>>> Renderers;
 };

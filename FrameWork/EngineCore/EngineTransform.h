@@ -3,7 +3,7 @@
 
 // 설명 :
 class EngineObject;
-class EngineTransform : public std::enable_shared_from_this<EngineTransform>
+class EngineTransform
 {
 	friend class EngineObject;
 
@@ -56,21 +56,21 @@ public:
 		return WorldMatrix;
 	}
 
-	void SetParent(std::shared_ptr<EngineTransform> ParentTransform)
+	void SetParent(EngineTransform* ParentTransform)
 	{
-		if (!Parent.expired())
+		if (Parent != nullptr)
 		{
 			//TODO : 원래 세팅된 부모를 제거하고 옮기는 기능
 			MsgAssert("기능 추가 필요")
 		}
 
-		ParentTransform->Childs.push_back(shared_from_this());
+		ParentTransform->Childs.push_back(this);
 		Parent = ParentTransform;
 	}
 
-	const std::shared_ptr<EngineTransform> GetParent() const
+	const EngineTransform* GetParent() const
 	{
-		return Parent.lock();
+		return Parent;
 	}
 
 	const std::shared_ptr<class EngineObject> GetMaster() const;
@@ -96,8 +96,8 @@ private:
 	float4x4 WorldMatrix; //월드 0,0 기준 좌표
 
 	std::weak_ptr<EngineObject> Master;
-	std::weak_ptr<EngineTransform> Parent;
-	std::vector<std::shared_ptr<EngineTransform>> Childs;
+	EngineTransform* Parent = nullptr;
+	std::vector<EngineTransform*> Childs;
 	
 	void CalLocalTransform();
 	void CalWorldTransform();

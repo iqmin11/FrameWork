@@ -16,8 +16,10 @@ public:
 	GraphicTestLevel& operator=(GraphicTestLevel&& _Other) noexcept = delete;
 
 protected:
-
+	void Begin() override;
 private:
+
+	std::weak_ptr<EngineActor> MyTestActor;
 
 };
 

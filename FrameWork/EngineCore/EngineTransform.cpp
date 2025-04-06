@@ -18,7 +18,7 @@ void EngineTransform::TransformUpdate()
 {
 	CalLocalTransform();
 	WorldMatrix = LocalMatrix;
-	if (!Parent.expired())
+	if (Parent != nullptr)
 	{
 		CalWorldTransform();
 	}
@@ -34,7 +34,7 @@ void EngineTransform::CalLocalTransform()
 
 void EngineTransform::CalWorldTransform()
 {
-	WorldMatrix = LocalMatrix * Parent.lock()->WorldMatrix;
+	WorldMatrix = LocalMatrix * Parent->WorldMatrix;
 }
 
 void EngineTransform::UpdateLocalFromWorld()
@@ -43,10 +43,10 @@ void EngineTransform::UpdateLocalFromWorld()
 	WorldQuaternion = float4::Rad2Quaternion(WorldRad);
 	WorldMatrix = float4x4::Compose(WorldScale, WorldRad, WorldQuaternion, WorldPosition);
 
-	if (Parent.expired())
+	if (Parent != nullptr)
 	{
 		//부모월드의 역행렬 구하고, 현재 월드에 곱해서 로컬을 구함
-		float4x4 ParentWorldInverse = Parent.lock()->GetWorldMatrix();
+		float4x4 ParentWorldInverse = Parent->GetWorldMatrix();
 		ParentWorldInverse.Inverse();
 		LocalMatrix = WorldMatrix * ParentWorldInverse;
 	}
@@ -71,6 +71,10 @@ void EngineTransform::LocalDecompose()
 
 void EngineTransform::SetMaster(std::shared_ptr<EngineObject> MasterPtr)
 {
+	if (!Master.expired())
+	{
+		MsgAssert("트랜스폼의 마스터는 바뀔 수 없습니다");
+	}
 	Master = MasterPtr;
 }
 

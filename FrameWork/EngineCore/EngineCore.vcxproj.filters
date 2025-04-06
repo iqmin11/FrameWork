@@ -92,6 +92,9 @@
     <ClInclude Include="EngineTransform.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="EngineRenderer.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="EngineTransform.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineRenderer.cpp">
+      <Filter>Object\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

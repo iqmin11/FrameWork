@@ -1,6 +1,7 @@
 #include "PrecompileHeader.h"
 #include "EngineLevel.h"
 #include "EngineGUI.h"
+#include "EngineRenderer.h"
 
 EngineLevel::EngineLevel()
 {
@@ -11,6 +12,17 @@ EngineLevel::~EngineLevel()
 {
 
 }
+
+void EngineLevel::PushRenderer(std::shared_ptr<EngineRenderer> Renderer)
+{
+	if (Renderer == nullptr)
+	{
+		MsgAssert("Renderer == nullptr");
+	}
+
+	Renderers[Renderer->GetOrder()].emplace_back(Renderer);
+}
+
 
 void EngineLevel::Begin()
 {
@@ -32,7 +44,7 @@ void EngineLevel::OnLevelExit()
 void EngineLevel::ActorInit(std::shared_ptr<EngineActor> _Actor, int _Order)
 {
 	this->Actors[_Order].push_back(_Actor);
-	_Actor->Init_Internal();
+	_Actor->Init_Internal(SharedCastingThis<EngineLevel>());
 	_Actor->Begin();
 }
 

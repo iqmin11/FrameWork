@@ -16,7 +16,10 @@
     </ClInclude>
     <ClInclude Include="ChatUser.h" />
     <ClInclude Include="GraphicTestLevel.h">
-      <Filter>Level</Filter>
+      <Filter>Level\GraphicTestLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="TestActor.h">
+      <Filter>Level\GraphicTestLevel\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -35,7 +38,10 @@
     </ClCompile>
     <ClCompile Include="ChatUser.cpp" />
     <ClCompile Include="GraphicTestLevel.cpp">
-      <Filter>Level</Filter>
+      <Filter>Level\GraphicTestLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="TestActor.cpp">
+      <Filter>Level\GraphicTestLevel\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +53,12 @@
     </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{af3dbdbf-0cdc-4fb8-a77d-041b3df0b361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\GraphicTestLevel">
+      <UniqueIdentifier>{056fd16f-6967-4019-8693-d27eca2fd93e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\GraphicTestLevel\Actor">
+      <UniqueIdentifier>{564110d9-073b-4137-abed-5b5b6a501126}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

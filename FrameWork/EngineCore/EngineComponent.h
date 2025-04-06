@@ -3,6 +3,7 @@
 
 class EngineComponent : public EngineObject
 {
+	friend class EngineActor;
 public:
 	// construtor destructor
 	EngineComponent();
@@ -16,10 +17,20 @@ public:
 
 	const std::shared_ptr<EngineObject> GetParent();
 
+	inline void SetOrder(int Value)
+	{
+		Order = Value;
+	}
+
+	inline int GetOrder() const
+	{
+		return Order;
+	}
+
 protected:
 	void Begin() override;
 
 private:
-
+	int Order = 0;
 };
 

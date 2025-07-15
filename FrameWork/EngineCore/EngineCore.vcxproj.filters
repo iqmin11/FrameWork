@@ -254,17 +254,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="ThirdParty\DirectXTex\lib\x64\Debug\DirectXTex.lib">
-      <Filter>ThirdParty\DirectXTex\bin\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\DirectXTex\lib\x64\Release\DirectXTex.lib">
+    <CopyFileToFolders Include="..\ThirdParty\DirectXTex\bin\Release\DirectXTex.pdb">
       <Filter>ThirdParty\DirectXTex\bin\Release</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\DirectXTex\lib\x64\Debug\DirectXTex.pdb">
+    <CopyFileToFolders Include="..\ThirdParty\DirectXTex\bin\Release\DirectXTex.lib">
+      <Filter>ThirdParty\DirectXTex\bin\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\DirectXTex\bin\Debug\DirectXTex.lib">
       <Filter>ThirdParty\DirectXTex\bin\Debug</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\DirectXTex\lib\x64\Release\DirectXTex.pdb">
-      <Filter>ThirdParty\DirectXTex\bin\Release</Filter>
+    <CopyFileToFolders Include="..\ThirdParty\DirectXTex\bin\Debug\DirectXTex.pdb">
+      <Filter>ThirdParty\DirectXTex\bin\Debug</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -36,7 +36,7 @@ void EngineGUI::Initalize()
     // Setup Platform/Renderer backends
 
     ImGui_ImplWin32_Init(EngineWindow::GethWnd());
-    ImGui_ImplDX11_Init(EngineDevice::GetDevice(), EngineDevice::GetContext());
+    ImGui_ImplDX11_Init(EngineDevice::GetDevice().Get(), EngineDevice::GetContext().Get());
 
     EngineWindow::SetUserMessageFunction(ImGui_ImplWin32_WndProcHandler);
 

@@ -15,7 +15,7 @@
       <Filter>Object\Component</Filter>
     </ClInclude>
     <ClInclude Include="PrecompileHeader.h">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClInclude>
     <ClInclude Include="EngineDevice.h">
       <Filter>DirectX</Filter>
@@ -47,47 +47,14 @@
     <ClInclude Include="imgui\imgui_impl_win32.h">
       <Filter>GUI\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="EngineResorce.h">
-      <Filter>Resorces</Filter>
-    </ClInclude>
     <ClInclude Include="EngineNameTag.h">
       <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="IEngineShader.h">
-      <Filter>Resorces\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineVertexShader.h">
-      <Filter>Resorces\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="EnginePixelShader.h">
-      <Filter>Resorces\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineInputLayout.h">
-      <Filter>Resorces\RenderingSetting</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineVertex.h">
-      <Filter>Resorces\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineVertexBuffer.h">
-      <Filter>Resorces\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineDirectBuffer.h">
-      <Filter>Resorces\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSampler.h">
-      <Filter>Resorces\Texture</Filter>
     </ClInclude>
     <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h">
       <Filter>ThirdParty\DirectXTex\Header</Filter>
     </ClInclude>
-    <ClInclude Include="EngineTexture.h">
-      <Filter>Resorces\Texture</Filter>
-    </ClInclude>
     <ClInclude Include="ThirdParty\stb\stb_image.h">
       <Filter>ThirdParty\STB</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineConstantBuffer.h">
-      <Filter>Resorces\Buffer</Filter>
     </ClInclude>
     <ClInclude Include="EngineTransform.h">
       <Filter>Object</Filter>
@@ -111,7 +78,7 @@
       <Filter>Object\Component</Filter>
     </ClCompile>
     <ClCompile Include="PrecompileHeader.cpp">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClCompile>
     <ClCompile Include="EngineDevice.cpp">
       <Filter>DirectX</Filter>
@@ -140,41 +107,8 @@
     <ClCompile Include="imgui\imgui_impl_win32.cpp">
       <Filter>GUI\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="EngineResorce.cpp">
-      <Filter>Resorces</Filter>
-    </ClCompile>
     <ClCompile Include="EngineNameTag.cpp">
       <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="IEngineShader.cpp">
-      <Filter>Resorces\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineVertexShader.cpp">
-      <Filter>Resorces\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="EnginePixelShader.cpp">
-      <Filter>Resorces\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineInputLayout.cpp">
-      <Filter>Resorces\RenderingSetting</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineVertex.cpp">
-      <Filter>Resorces\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineVertexBuffer.cpp">
-      <Filter>Resorces\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineDirectBuffer.cpp">
-      <Filter>Resorces\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSampler.cpp">
-      <Filter>Resorces\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineTexture.cpp">
-      <Filter>Resorces\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineConstantBuffer.cpp">
-      <Filter>Resorces\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="EngineTransform.cpp">
       <Filter>Object</Filter>
@@ -196,9 +130,6 @@
     <Filter Include="Object\Component">
       <UniqueIdentifier>{6eaab15c-0906-414c-8aa4-653aff6c600a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header">
-      <UniqueIdentifier>{7e090830-0c7e-44e8-834b-699c5facaa76}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DirectX">
       <UniqueIdentifier>{da4ad1d9-f6f9-4d9b-a237-7d3541bc06ab}</UniqueIdentifier>
     </Filter>
@@ -210,21 +141,6 @@
     </Filter>
     <Filter Include="Resorces">
       <UniqueIdentifier>{61591fe9-939b-4669-b3c3-90a8d2da3907}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resorces\Shader">
-      <UniqueIdentifier>{6d96e00d-d4d0-44a8-9a62-45bebad261f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resorces\RenderingSetting">
-      <UniqueIdentifier>{6abb56d7-4c59-48eb-a97d-12c9914598ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resorces\Mesh">
-      <UniqueIdentifier>{202fefdc-9da5-4497-a285-85bcc320d71c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resorces\Buffer">
-      <UniqueIdentifier>{6227d195-40a8-476a-9c9d-996e928fccc8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resorces\Texture">
-      <UniqueIdentifier>{97d79c2c-163d-4a76-8c12-f67ba73af0a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="ThirdParty">
       <UniqueIdentifier>{1d978d1d-ea98-4faf-ab9e-c7d4d2b1f014}</UniqueIdentifier>
@@ -246,6 +162,9 @@
     </Filter>
     <Filter Include="ThirdParty\STB">
       <UniqueIdentifier>{5575f1c8-83f0-4a90-bdd4-760196822b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{7e090830-0c7e-44e8-834b-699c5facaa76}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

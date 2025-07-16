@@ -3,17 +3,17 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PrecompileHeader.cpp">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Header">
+    <Filter Include="PCH">
       <UniqueIdentifier>{c8131eac-02af-480e-a745-0bfc6517f9d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PrecompileHeader.h">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

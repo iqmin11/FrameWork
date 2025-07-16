@@ -5,16 +5,16 @@
       <Filter>Window</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Header\WindowDefaultHeader</Filter>
+      <Filter>PCH\WindowDefaultHeader</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
-      <Filter>Header\WindowDefaultHeader</Filter>
+      <Filter>PCH\WindowDefaultHeader</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Header\WindowDefaultHeader</Filter>
+      <Filter>PCH\WindowDefaultHeader</Filter>
     </ClInclude>
     <ClInclude Include="PrecompileHeader.h">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClInclude>
     <ClInclude Include="EngineClient.h">
       <Filter>Network</Filter>
@@ -39,17 +39,17 @@
     <Filter Include="Window">
       <UniqueIdentifier>{a231d329-d523-49d5-bbcd-f4d284415dc7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header">
-      <UniqueIdentifier>{6306095a-5fe4-42cc-9531-61d82948dd60}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header\WindowDefaultHeader">
-      <UniqueIdentifier>{3ac4c879-6501-4f99-b005-2912e00aeecd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Network">
       <UniqueIdentifier>{3f042f78-39e5-489d-8cf8-c123f204c9f3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Thread">
       <UniqueIdentifier>{ac511bb6-c588-4bda-8e5f-b7a4e5c4e9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{6306095a-5fe4-42cc-9531-61d82948dd60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH\WindowDefaultHeader">
+      <UniqueIdentifier>{3ac4c879-6501-4f99-b005-2912e00aeecd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,7 +57,7 @@
       <Filter>Window</Filter>
     </ClCompile>
     <ClCompile Include="PrecompileHeader.cpp">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClCompile>
     <ClCompile Include="EngineClient.cpp">
       <Filter>Network</Filter>
@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint">
-      <Filter>Header\WindowDefaultHeader</Filter>
+      <Filter>PCH\WindowDefaultHeader</Filter>
     </None>
   </ItemGroup>
 </Project>

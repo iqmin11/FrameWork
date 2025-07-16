@@ -3,7 +3,7 @@
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="PrecompileHeader.h">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClInclude>
     <ClInclude Include="ChatLevel.h">
       <Filter>Level</Filter>
@@ -25,7 +25,7 @@
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PrecompileHeader.cpp">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClCompile>
     <ClCompile Include="ChatLevel.cpp">
       <Filter>Level</Filter>
@@ -45,9 +45,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Header">
-      <UniqueIdentifier>{aac66d8d-f954-4700-ae85-71d521c7afbd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{356a0647-84d4-4fc5-af22-4fdd4965ba2a}</UniqueIdentifier>
     </Filter>
@@ -59,6 +56,9 @@
     </Filter>
     <Filter Include="Level\GraphicTestLevel\Actor">
       <UniqueIdentifier>{564110d9-073b-4137-abed-5b5b6a501126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{aac66d8d-f954-4700-ae85-71d521c7afbd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

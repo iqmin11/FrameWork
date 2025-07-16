@@ -5,7 +5,7 @@
     <ClInclude Include="EngineMath.h" />
     <ClInclude Include="EngineString.h" />
     <ClInclude Include="PrecompileHeader.h">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClInclude>
     <ClInclude Include="EngineTime.h" />
     <ClInclude Include="EngineSerializer.h" />
@@ -24,7 +24,7 @@
     <ClCompile Include="EngineMath.cpp" />
     <ClCompile Include="EngineString.cpp" />
     <ClCompile Include="PrecompileHeader.cpp">
-      <Filter>Header</Filter>
+      <Filter>PCH</Filter>
     </ClCompile>
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="EngineSerializer.cpp" />
@@ -39,11 +39,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Header">
-      <UniqueIdentifier>{37a36f3d-61c3-4ef0-b854-3a33f084e02e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FileIO">
       <UniqueIdentifier>{50b77b47-c384-4536-9e0a-2aed7aad7c06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{37a36f3d-61c3-4ef0-b854-3a33f084e02e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

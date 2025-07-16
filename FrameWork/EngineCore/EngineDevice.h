@@ -13,7 +13,6 @@ public:
 	static void Initialize();
 
 	static void CreateSwapChain();
-	static void CreateResorces();
 	static void CreateDepthStencil();
 
 	static void Release();
@@ -22,29 +21,24 @@ public:
 
 	static void RenderEnd();
 
-	inline static ID3D11Device* GetDevice()
+	inline static WRL::ComPtr<ID3D11Device> GetDevice()
 	{
 		return Device;
 	}
 
-	inline static ID3D11DeviceContext* GetContext()
+	inline static WRL::ComPtr<ID3D11DeviceContext> GetContext()
 	{
 		return Context;
 	}
 
-	inline static ID3D11RenderTargetView* GetRTV()
+	inline static WRL::ComPtr<ID3D11RenderTargetView> GetRTV()
 	{
 		return MainRTV;
 	}
 
 	inline static ID3D11RenderTargetView** GetRTVRef()
 	{
-		return &MainRTV;
-	}
-
-	inline static ID3D11Texture2D* GetBackBuffer()
-	{
-		return BackBuffer;
+		return MainRTV.GetAddressOf();
 	}
 
 	static void Draw();
@@ -54,16 +48,15 @@ protected:
 
 private:
 
-	static ID3D11Device1* Device;
-	static ID3D11DeviceContext1* Context;
-	static IDXGISwapChain1* SwapChain;
-	static IDXGIAdapter* GetHighPerformanceAdapter();
+	inline static WRL::ComPtr<ID3D11Device1> Device = nullptr;
+	inline static WRL::ComPtr<ID3D11DeviceContext1> Context = nullptr;
+	inline static WRL::ComPtr<IDXGISwapChain1> SwapChain = nullptr;
+	static WRL::ComPtr<IDXGIAdapter> GetHighPerformanceAdapter();
 	
-	static ID3D11Texture2D* BackBuffer;
-	static ID3D11RenderTargetView* MainRTV;
+	inline static WRL::ComPtr<ID3D11RenderTargetView> MainRTV = nullptr;
 
-	static ID3D11Texture2D* DepthStencileBuffer;
-	static ID3D11DepthStencilView* MainDSV;
+	inline static WRL::ComPtr<ID3D11Texture2D> DepthStencileBuffer = nullptr;
+	inline static WRL::ComPtr<ID3D11DepthStencilView> MainDSV = nullptr;
 
 	// constrcuter destructer
 	EngineDevice();

@@ -1,7 +1,7 @@
 #include "PrecompileHeader.h"
 #include "EngineGUI.h"
 #include "EnginePlatform/EngineWindow.h"
-#include "EngineCore/EngineDevice.h"
+#include "EngineCore/EngineDirectX.h"
 #include "EngineLevel.h"
 
 std::map<std::string, std::shared_ptr<EngineGUIWindow>> EngineGUI::AllWindow;
@@ -36,7 +36,7 @@ void EngineGUI::Initalize()
     // Setup Platform/Renderer backends
 
     ImGui_ImplWin32_Init(EngineWindow::GethWnd());
-    ImGui_ImplDX11_Init(EngineDevice::GetDevice().Get(), EngineDevice::GetContext().Get());
+    ImGui_ImplDX11_Init(EngineDirectX::GetDevice().Get(), EngineDirectX::GetContext().Get());
 
     EngineWindow::SetUserMessageFunction(ImGui_ImplWin32_WndProcHandler);
 

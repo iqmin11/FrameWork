@@ -1,25 +1,27 @@
 #include "PrecompileHeader.h"
-#include "EngineDevice.h"
+#include "EngineDirectX.h"
 
 #include "EngineBase/EngineDirectory.h"
 #include "EngineBase/EngineFile.h"
 
 #include "EnginePlatform/EngineWindow.h"
 
-EngineDevice::EngineDevice()
+#include "EngineTexture.h"
+#include "EngineViewportTarget.h"
+
+EngineDirectX::EngineDirectX()
 {
 }
 
-EngineDevice::~EngineDevice()
+EngineDirectX::~EngineDirectX()
 {
 }
 
-void EngineDevice::Draw()
+void EngineDirectX::Draw()
 {
-	
 }
 
-WRL::ComPtr<IDXGIAdapter> EngineDevice::GetHighPerformanceAdapter()
+WRL::ComPtr<IDXGIAdapter> EngineDirectX::GetHighPerformanceAdapter()
 {
 	// GDI+ DXGI <=
 
@@ -64,7 +66,7 @@ WRL::ComPtr<IDXGIAdapter> EngineDevice::GetHighPerformanceAdapter()
 	return Adapter;
 }
 
-void EngineDevice::CreateSwapChain()
+void EngineDirectX::CreateSwapChain()
 {
 	//SwapChain 개체 세팅 Process
 	{
@@ -100,74 +102,61 @@ void EngineDevice::CreateSwapChain()
 		}
 
 		//Swapchain을 위한 Desc를 설정하고
-		DXGI_SWAP_CHAIN_DESC1 SwapChainDesc = { 0, };
+		float4 ScreenSize = EngineWindow::GetScreenSize();
 
-		SwapChainDesc.Width = 0;
-		SwapChainDesc.Height = 0;
-		SwapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM_SRGB;
-		SwapChainDesc.SampleDesc.Count = 1;
-		SwapChainDesc.SampleDesc.Quality = 0;
-		SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		DXGI_SWAP_CHAIN_DESC SwapChainDesc = { 0, };
+
 		SwapChainDesc.BufferCount = 2;
-		SwapChainDesc.Scaling = DXGI_SCALING_STRETCH;
-		SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-		SwapChainDesc.AlphaMode = DXGI_ALPHA_MODE_UNSPECIFIED;
-		SwapChainDesc.Flags = 0;
+		SwapChainDesc.BufferDesc.Width = ScreenSize.uix();
+		SwapChainDesc.BufferDesc.Height = ScreenSize.uiy();
+		SwapChainDesc.OutputWindow = EngineWindow::GethWnd();
+
+		SwapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
+		SwapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+
+		SwapChainDesc.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+		SwapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+		SwapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+
+		SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT | DXGI_USAGE_SHADER_INPUT;
+
+		SwapChainDesc.SampleDesc.Quality = 0;
+		SwapChainDesc.SampleDesc.Count = 1;
+
+		SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
+		SwapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+
+		SwapChainDesc.Windowed = true;
 
 		//Factory를 통해, Swapchain을 생성
-		HRESULT Result = DxgiFactory->CreateSwapChainForHwnd(Device.Get(), EngineWindow::GethWnd(), &SwapChainDesc, 0, 0, &SwapChain);
+		HRESULT Result = DxgiFactory->CreateSwapChain(Device.Get(), &SwapChainDesc, SwapChain.GetAddressOf());
 		assert(SUCCEEDED(Result));
 	}
-	
+
 	//Swapchain에 FrameBuffer 세팅
 	{
 		//FrameBuffer 받아오기
-		WRL::ComPtr<ID3D11Texture2D> BackBuffer = nullptr;
 
-		HRESULT Result = SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&BackBuffer);
+		WRL::ComPtr<ID3D11Texture2D> SwapChainOutBackBuffer = nullptr;
+		HRESULT Result = SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)SwapChainOutBackBuffer.GetAddressOf());
 		assert(SUCCEEDED(Result));
 
-		Result = Device->CreateRenderTargetView(BackBuffer.Get(), nullptr, &MainRTV);
+		std::shared_ptr<EngineTexture> EngineBackBuffer = std::make_shared<EngineTexture>();
+		EngineBackBuffer->ResCreateForBackbuffer(SwapChainOutBackBuffer);
 		assert(SUCCEEDED(Result));
+
+		BackBufferTarget = EngineViewportTarget::Create("MainBackBufferTarget", EngineBackBuffer, float4::BLUE);
+		BackBufferTarget->CreateDepthTexture();
 	}
 }
 
-void EngineDevice::CreateDepthStencil()
+void EngineDirectX::DrawStart()
 {
-	float4 ScreenSize = EngineWindow::GetScreenSize();
-
-	D3D11_TEXTURE2D_DESC DepthStencilDesc = { 0, };
-	DepthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
-	DepthStencilDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
-	DepthStencilDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
-	DepthStencilDesc.Width = static_cast<UINT>(ScreenSize.ix());
-	DepthStencilDesc.Height = static_cast<UINT>(ScreenSize.iy());
-	DepthStencilDesc.ArraySize = 1;
-	DepthStencilDesc.SampleDesc.Count = 1;
-	DepthStencilDesc.SampleDesc.Quality = 0;
-
-	HRESULT Result = Device->CreateTexture2D(&DepthStencilDesc, nullptr, &DepthStencileBuffer);
-	if (FAILED(Result))
-	{
-		MsgAssert("뎁스스텐실버퍼 생성에 실패했습니다.");
-		return;
-	}
-
-	Result = Device->CreateDepthStencilView(DepthStencileBuffer.Get(), nullptr, &MainDSV);
-	if (FAILED(Result))
-	{
-		MsgAssert("뎁스스텐실뷰 생성에 실패했습니다.");
-		return;
-	}
+	BackBufferTarget->Clear();
+	BackBufferTarget->Setting();
 }
 
-void EngineDevice::RenderStart()
-{
-	const static float4 clear_color = { 0.45f, 0.55f, 0.60f, 1.00f };
-	Context->ClearRenderTargetView(EngineDevice::GetRTV().Get(), clear_color.Arr1D);
-}
-
-void EngineDevice::RenderEnd()
+void EngineDirectX::DrawEnd()
 {
 	HRESULT Result = SwapChain->Present(1, 0);
 	if (Result == DXGI_ERROR_DEVICE_REMOVED || Result == DXGI_ERROR_DEVICE_RESET)
@@ -178,7 +167,7 @@ void EngineDevice::RenderEnd()
 	}
 }
 
-void EngineDevice::Initialize()
+void EngineDirectX::Initialize()
 {
 
 	if (nullptr == EngineWindow::GethWnd())
@@ -252,6 +241,7 @@ void EngineDevice::Initialize()
 	//CreateDepthStencil();
 }
 
-void EngineDevice::Release()
+void EngineDirectX::Release()
 {
+
 }

@@ -35,6 +35,11 @@ struct alignas(16) float4
 	static const float4 ZERO;
 	static const float4 ZERONULL;
 	static const float4 ONE;
+	static const float4 BLACK;
+	static const float4 WHITE;
+	static const float4 RED;
+	static const float4 GREEN;
+	static const float4 BLUE;
 
 	union
 	{
@@ -158,42 +163,42 @@ struct alignas(16) float4
 	}
 
 
-	int uix() const
+	unsigned int uix() const
 	{
 		return static_cast<unsigned int>(x);
 	}
 
-	int uiy() const
+	unsigned int uiy() const
 	{
 		return static_cast<unsigned int>(y);
 	}
 
-	int uiz() const
+	unsigned int uiz() const
 	{
 		return static_cast<unsigned int>(z);
 	}
 
-	int uiw() const
+	unsigned int uiw() const
 	{
 		return static_cast<unsigned int>(w);
 	}
 
-	int uhix() const
+	unsigned int uhix() const
 	{
 		return static_cast<unsigned int>(x * 0.5f);
 	}
 
-	int uhiy() const
+	unsigned int uhiy() const
 	{
 		return static_cast<unsigned int>(y * 0.5f);
 	}
 
-	int uhiz() const
+	unsigned int uhiz() const
 	{
 		return static_cast<unsigned int>(z * 0.5f);
 	}
 
-	int uhiw() const
+	unsigned int uhiw() const
 	{
 		return static_cast<unsigned int>(w * 0.5f);
 	}

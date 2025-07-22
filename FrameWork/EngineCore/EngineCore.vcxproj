@@ -179,7 +179,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EngineDevice.h">
+    <ClInclude Include="EngineDirectX.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -203,7 +203,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineResource.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineTexture.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineTransform.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineViewportTarget.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -235,7 +247,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EngineDevice.cpp">
+    <ClCompile Include="EngineDirectX.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -259,7 +271,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineResource.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineTexture.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EngineTransform.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineViewportTarget.cpp">
       <SubType>
       </SubType>
     </ClCompile>

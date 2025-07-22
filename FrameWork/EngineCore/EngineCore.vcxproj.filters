@@ -17,7 +17,7 @@
     <ClInclude Include="PrecompileHeader.h">
       <Filter>PCH</Filter>
     </ClInclude>
-    <ClInclude Include="EngineDevice.h">
+    <ClInclude Include="EngineDirectX.h">
       <Filter>DirectX</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
@@ -62,6 +62,15 @@
     <ClInclude Include="EngineRenderer.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
+    <ClInclude Include="EngineTexture.h">
+      <Filter>Resorces</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineResource.h">
+      <Filter>Resorces</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineViewportTarget.h">
+      <Filter>Resorces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -80,7 +89,7 @@
     <ClCompile Include="PrecompileHeader.cpp">
       <Filter>PCH</Filter>
     </ClCompile>
-    <ClCompile Include="EngineDevice.cpp">
+    <ClCompile Include="EngineDirectX.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
@@ -115,6 +124,15 @@
     </ClCompile>
     <ClCompile Include="EngineRenderer.cpp">
       <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineTexture.cpp">
+      <Filter>Resorces</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineResource.cpp">
+      <Filter>Resorces</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineViewportTarget.cpp">
+      <Filter>Resorces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

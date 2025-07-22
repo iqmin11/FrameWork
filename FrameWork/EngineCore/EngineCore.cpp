@@ -4,7 +4,7 @@
 
 #include "EngineCore.h"
 #include "EngineLevel.h"
-#include "EngineDevice.h"
+#include "EngineDirectX.h"
 #include "EngineGUI.h"
 
 std::shared_ptr<EngineLevel> EngineCore::CurUpdatedLevel = nullptr;
@@ -51,9 +51,9 @@ void EngineCore::CoreTick()
 	CurUpdatedLevel->ActorTransformUpdate(TimeDeltaTime);
 	//CurUpdatedLevel->ActorLateUpdate(TimeDeltaTime);
 
-	EngineDevice::RenderStart();
-	EngineDevice::Draw();
-	EngineDevice::RenderEnd();
+	EngineDirectX::DrawStart();
+	EngineDirectX::Draw();
+	EngineDirectX::DrawEnd();
 
 	CurUpdatedLevel->ActorRelease();
 }
@@ -61,7 +61,7 @@ void EngineCore::CoreTick()
 void EngineCore::EngineBegin(std::function<void()> ContentsBegin)
 {
 	//EngineBegin
-	EngineDevice::Initialize();
+	EngineDirectX::Initialize();
 	EngineGUI::Initalize();
 
 	//ContentsBegin
@@ -78,10 +78,10 @@ void EngineCore::EngineEnd(std::function<void()> ContentsEnd)
 	{
 		ContentsEnd();
 	}
-	
+
 	//EngineEnd
 	EngineGUI::Release();
-	EngineDevice::Release();
+	EngineDirectX::Release();
 	EngineWindow::WinodwRelease();
 }
 

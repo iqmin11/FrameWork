@@ -19,6 +19,7 @@ EngineDirectX::~EngineDirectX()
 
 void EngineDirectX::Draw()
 {
+
 }
 
 WRL::ComPtr<IDXGIAdapter> EngineDirectX::GetHighPerformanceAdapter()

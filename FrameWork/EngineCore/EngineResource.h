@@ -35,6 +35,12 @@ public:
 
 	virtual void Setting() {};
 
+	static void Release()
+	{
+		NamedResources.clear();
+		UnnamedResources.clear();
+	}
+
 protected:
 
 	static std::shared_ptr<ResourceType> CreateInst(std::string_view _Name)

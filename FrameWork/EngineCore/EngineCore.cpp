@@ -10,7 +10,7 @@
 std::shared_ptr<EngineLevel> EngineCore::CurUpdatedLevel = nullptr;
 std::shared_ptr<EngineLevel> EngineCore::ChangeRequestLevel = nullptr;
 
-std::map<std::string, std::shared_ptr<EngineLevel>> EngineCore::LevelManager;
+std::map<std::string, std::shared_ptr<EngineLevel>> EngineCore::Levels;
 
 EngineCore::EngineCore()
 {
@@ -62,6 +62,7 @@ void EngineCore::EngineBegin(std::function<void()> ContentsBegin)
 {
 	//EngineBegin
 	EngineDirectX::Initialize();
+	CoreResourceInit();
 	EngineGUI::Initalize();
 
 	//ContentsBegin
@@ -81,6 +82,7 @@ void EngineCore::EngineEnd(std::function<void()> ContentsEnd)
 
 	//EngineEnd
 	EngineGUI::Release();
+	CoreResourceRelease();
 	EngineDirectX::Release();
 	EngineWindow::WinodwRelease();
 }

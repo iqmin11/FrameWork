@@ -62,14 +62,23 @@
     <ClInclude Include="EngineRenderer.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
-    <ClInclude Include="EngineTexture.h">
-      <Filter>Resorces</Filter>
-    </ClInclude>
     <ClInclude Include="EngineResource.h">
       <Filter>Resorces</Filter>
     </ClInclude>
+    <ClInclude Include="EngineTexture.h">
+      <Filter>Resorces\Texture</Filter>
+    </ClInclude>
     <ClInclude Include="EngineViewportTarget.h">
-      <Filter>Resorces</Filter>
+      <Filter>Resorces\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineInputLayout.h">
+      <Filter>Resorces\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineStaticMeshVertex.h">
+      <Filter>Resorces\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDynamicMeshVertex.h">
+      <Filter>Resorces\Vertex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,14 +134,24 @@
     <ClCompile Include="EngineRenderer.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
-    <ClCompile Include="EngineTexture.cpp">
-      <Filter>Resorces</Filter>
-    </ClCompile>
     <ClCompile Include="EngineResource.cpp">
       <Filter>Resorces</Filter>
     </ClCompile>
+    <ClCompile Include="EngineTexture.cpp">
+      <Filter>Resorces\Texture</Filter>
+    </ClCompile>
     <ClCompile Include="EngineViewportTarget.cpp">
-      <Filter>Resorces</Filter>
+      <Filter>Resorces\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineCore_Resource.cpp" />
+    <ClCompile Include="EngineInputLayout.cpp">
+      <Filter>Resorces\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineStaticMeshVertex.cpp">
+      <Filter>Resorces\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDynamicMeshVertex.cpp">
+      <Filter>Resorces\Vertex</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +202,15 @@
     </Filter>
     <Filter Include="PCH">
       <UniqueIdentifier>{7e090830-0c7e-44e8-834b-699c5facaa76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resorces\Texture">
+      <UniqueIdentifier>{6dec5b94-d93a-40cc-b191-6974f0917a1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resorces\RenderState">
+      <UniqueIdentifier>{28565ef3-233e-47b9-b58c-0ea9cf2005d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resorces\Vertex">
+      <UniqueIdentifier>{79c6329e-2e79-4a5e-a144-64dc3920b827}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

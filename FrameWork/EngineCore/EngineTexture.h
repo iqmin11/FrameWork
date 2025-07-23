@@ -28,6 +28,11 @@ public:
 
 	//Getter
 
+	WRL::ComPtr<ID3D11ShaderResourceView> GetSRV()
+	{
+		return SRV;
+	}
+
 	WRL::ComPtr<ID3D11RenderTargetView> GetRTV()
 	{
 		return RTV;
@@ -36,11 +41,6 @@ public:
 	WRL::ComPtr<ID3D11DepthStencilView> GetDSV()
 	{
 		return DSV;
-	}
-
-	WRL::ComPtr<ID3D11ShaderResourceView> GetSRV()
-	{
-		return SRV;
 	}
 
 	unsigned int GetHeight()
@@ -57,9 +57,9 @@ protected:
 
 private:
 	WRL::ComPtr<ID3D11Texture2D> Texture2D = nullptr;
+	WRL::ComPtr<ID3D11ShaderResourceView> SRV = nullptr;
 	WRL::ComPtr<ID3D11RenderTargetView> RTV = nullptr;
 	WRL::ComPtr<ID3D11DepthStencilView> DSV = nullptr;
-	WRL::ComPtr<ID3D11ShaderResourceView> SRV = nullptr;
 
 	D3D11_TEXTURE2D_DESC Desc;
 	DirectX::TexMetadata Data;
@@ -68,8 +68,8 @@ private:
 	void ResCreateForBackbuffer(WRL::ComPtr<ID3D11Texture2D> _Texture);
 	void ResCreate(const D3D11_TEXTURE2D_DESC _Desc);
 
+	void CreateSRV();
 	void CreateRTV();
 	void CreateDSV();
-	void CreateSRV();
 };
 

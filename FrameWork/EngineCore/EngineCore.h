@@ -40,7 +40,7 @@ public:
 
 		Name = EngineString::ToUpper(Name);
 
-		auto InsertResult = LevelManager.insert(std::make_pair(Name, NewLevel));
+		auto InsertResult = Levels.insert(std::make_pair(Name, NewLevel));
 		if (!InsertResult.second)
 		{
 			MsgAssert("이미 있는 이름의 레벨은 추가할 수 없습니다")
@@ -58,9 +58,9 @@ public:
 	{
 		std::string FindName = LevelName.data();
 		FindName = EngineString::ToUpper(FindName);
-		auto FindIter = LevelManager.find(FindName);
+		auto FindIter = Levels.find(FindName);
 
-		if (FindIter == LevelManager.end())
+		if (FindIter == Levels.end())
 		{
 			MsgAssert("찾고자 하는 레벨이 없습니다");
 		}
@@ -79,12 +79,15 @@ private:
 	static void EngineBegin(std::function<void()> ContentsBegin = nullptr);
 	static void EngineEnd(std::function<void()> ContentsEnd = nullptr);
 
-	static std::map<std::string, std::shared_ptr<EngineLevel>> LevelManager;
+	static std::map<std::string, std::shared_ptr<EngineLevel>> Levels;
 
 	//Change Level
 	static std::shared_ptr<EngineLevel> ChangeRequestLevel;
 
 	static bool HasLevelChanged();
 	static void LevelChangeProc();
+	static void CoreResourceInit();
+	static void CoreResourceRelease();
+
 };
 
